@@ -2,14 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://x1a0.net/2021/11/05/test-my-new-blog/</loc>
+    <loc>https://x1a0.net/about/index.html</loc>
     
     <lastmod>2021-11-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://x1a0.net/about/index.html</loc>
+    <loc>https://x1a0.net/categories/index.html</loc>
+    
+    <lastmod>2021-11-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://x1a0.net/2021/11/05/test-my-new-blog/</loc>
     
     <lastmod>2021-11-05</lastmod>
     
@@ -73,13 +80,6 @@
   
   <url>
     <loc>https://x1a0.net/tags/index.html</loc>
-    
-    <lastmod>2021-04-28</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://x1a0.net/categories/index.html</loc>
     
     <lastmod>2021-04-28</lastmod>
     
