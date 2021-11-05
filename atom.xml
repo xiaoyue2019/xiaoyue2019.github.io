@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2021-07-27T11:21:30.000Z</updated>
+  <updated>2021-11-05T07:01:56.028Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test-my-new-blog</title>
+    <link href="https://x1a0.net/2021/11/05/test-my-new-blog/"/>
+    <id>https://x1a0.net/2021/11/05/test-my-new-blog/</id>
+    <published>2021-11-05T06:50:13.000Z</published>
+    <updated>2021-11-05T07:01:56.028Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="我是三级标题"><a href="#我是三级标题" class="headerlink" title="我是三级标题"></a>我是三级标题</h3><h4 id="我是四级标题"><a href="#我是四级标题" class="headerlink" title="我是四级标题"></a>我是四级标题</h4><h5 id="我是五级标题"><a href="#我是五级标题" class="headerlink" title="我是五级标题"></a>我是五级标题</h5><hr><p><em><strong>我是粗斜体</strong></em> </p><p><em>我是斜体</em></p><p><strong>我是粗体</strong></p><hr><p><del>我是删除线</del></p><hr><p><u>我是下划线</u></p><hr><ol><li>列表<ul><li>小列表</li></ul></li><li>列表<ul><li>大列表</li></ul></li></ol><hr><blockquote><p>区块</p><blockquote><p>第二层区块</p></blockquote></blockquote><hr><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget x1a0.net</span><br></pre></td></tr></table></figure><hr><p>这是<a href="x1a0.net">链接</a></p><hr><p><img src="../../public/img/zhi.jpg"></p><hr><table><thead><tr><th align="left">左对齐</th><th align="right">右对齐</th><th align="center">居中对齐</th></tr></thead><tbody><tr><td align="left">单元格</td><td align="right">单元格</td><td align="center">单元格</td></tr><tr><td align="left">单元格</td><td align="right">单元格</td><td align="center">单元格</td></tr></tbody></table><hr>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;我是三级标题&quot;&gt;&lt;a href=&quot;#我是三级标题&quot; class=&quot;headerlink&quot; title=&quot;我是三级标题&quot;&gt;&lt;/a&gt;我是三级标题&lt;/h3&gt;&lt;h4 id=&quot;我是四级标题&quot;&gt;&lt;a href=&quot;#我是四级标题&quot; class=&quot;headerlink&quot; titl</summary>
+      
+    
+    
+    
+    
+    <category term="Hexo" scheme="https://x1a0.net/tags/Hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>rust学习第二天</title>
@@ -470,28 +492,6 @@ include(&amp;quot;flag.php&amp;quot;)</summary>
     
     
     <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>trojan使用教程</title>
-    <link href="https://x1a0.net/2020/05/12/135/"/>
-    <id>https://x1a0.net/2020/05/12/135/</id>
-    <published>2020-05-12T13:19:00.000Z</published>
-    <updated>2020-11-04T07:21:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>客户端下载：</strong><br>[Windows](<a href="https://x1a0.net/trojan-cli-down/trojan-cli.rar">https://x1a0.net/trojan-cli-down/trojan-cli.rar</a><br>  [2<a href="https://x1a0.net/trojan-cli-down/trojan0.1.0.apk">https://x1a0.net/trojan-cli-down/trojan0.1.0.apk</a><br>  [3<a href="https://x1a0.net/trojan-cli-down/trojan-1.15.1-linux-amd64.tar.xz">https://x1a0.net/trojan-cli-down/trojan-1.15.1-linux-amd64.tar.xz</a><br>  [4<a href="https://x1a0.net/trojan-cli-down/trojan-1.15.1-macos.zip">https://x1a0.net/trojan-cli-down/trojan-1.15.1-macos.zip</a><br>  [5<a href="https://oss.x1a0.net/image/2020/05/12/8926414283168/1.png">https://oss.x1a0.net/image/2020/05/12/8926414283168/1.png</a><br>  [6<a href="https://oss.x1a0.net/image/2020/05/12/892643597831113/2.png">https://oss.x1a0.net/image/2020/05/12/892643597831113/2.png</a><br>  [7<a href="https://oss.x1a0.net/image/2020/05/15/080551058105869/Screenshot_2020-05-15-09-57-01-792_io.github.trojan_gfw.igniter.jpg">https://oss.x1a0.net/image/2020/05/15/080551058105869/Screenshot_2020-05-15-09-57-01-792_io.github.trojan_gfw.igniter.jpg</a>)<br>[Android][2]<br>[Linux][3]<br>[MAC][4]</p><p><strong>windows:</strong></p><p>打开trojan客户端，点击start（没有任何反应）<br>![1.png][5]</p><hr><p>然后来到v2ray客户端添加本地代理：<br>![2.png][6]</p><hr><p>然后就可以像用v2ray原本一样使用了。<br>不需要的时候记住一定要stop客户端。（不然会一直跑127ip上的流量。还有v2ray上的代理要关闭或者设置pac模式。）<br>pac模式，pac模式，pac模式！<br>Trojan偷跑流量+v2ray全局模式开起来，服务器要给跑崩，我心疼啊。</p><p><strong>Android：</strong><br>(安卓客户端因为没有pac选项，代理上了之后就强制全局代理，这样会导致网速很卡，强制所有流量都走VPN。这样搞被封的概率也会大大增加。)</p><p><a href="http://www.msl3.top/">www.msl3.top</a><br>443<br>15d3e9f0</p><p>很简洁就三个空，按着填下来就好了。<br>url,端口，密码</p><p>![Screenshot_2020-05-15-09-57-01-792_io.github.trojan_gfw.igniter.jpg][7]</p><hr><p>vc那个选项要关闭</p><p><strong>linux:</strong><br>和Windows同理。Linux直接就能设置代理，不用v2ray。<br>（把Windows下的config文件复制过去就好。）<br>没有可视化的直接export http_proxy=xxx。（能用上Linux这命令应该都清楚吧）<br>实测可行。</p><p>至于mac和ios。。emmm，穷。</p><p>问题1：<br>如果电脑端不可用手机端可用：<br><img src="https://oss.x1a0.net/image/2020/05/13/439432380854524/%E6%8D%95%E8%8E%B7.PNG" alt="捕获.PNG"></p><hr><p>可以如图所示把域名换成  <a href="http://www.filt.top/">www.filt.top</a><br>因为上一个多次申请免费证书被限制了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;&lt;strong&gt;客户端下载：&lt;/strong&gt;&lt;br&gt;[Windows](&lt;a href=&quot;https://x1a0.net/trojan-cli-down/trojan-cli.rar&quot;&gt;https://x1a0.net/trojan-cli-down/trojan-cl</summary>
-      
-    
-    
-    
-    <category term="杂项" scheme="https://x1a0.net/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
   </entry>

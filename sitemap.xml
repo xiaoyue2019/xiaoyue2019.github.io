@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://x1a0.net/2021/11/05/test-my-new-blog/</loc>
+    
+    <lastmod>2021-11-05</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://x1a0.net/about/index.html</loc>
     
     <lastmod>2021-11-05</lastmod>
@@ -390,6 +397,13 @@
   
   <url>
     <loc>https://x1a0.net/tags/Windows/</loc>
+    <lastmod>2021-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://x1a0.net/tags/Hexo/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
