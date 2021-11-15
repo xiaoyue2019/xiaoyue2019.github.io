@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2021-11-10T07:30:15.967Z</updated>
+  <updated>2021-11-15T12:57:49.688Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ETHbuild-零代码入门合约开发</title>
+    <link href="https://x1a0.net/2021/11/15/ETHbuild-%E9%9B%B6%E4%BB%A3%E7%A0%81%E5%85%A5%E9%97%A8%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/"/>
+    <id>https://x1a0.net/2021/11/15/ETHbuild-%E9%9B%B6%E4%BB%A3%E7%A0%81%E5%85%A5%E9%97%A8%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</id>
+    <published>2021-11-15T12:05:45.000Z</published>
+    <updated>2021-11-15T12:57:49.688Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="ETHbuild-零代码入门合约开发"><a href="#ETHbuild-零代码入门合约开发" class="headerlink" title="ETHbuild-零代码入门合约开发"></a>ETHbuild-零代码入门合约开发</h1><h2 id="1-神奇的sandbox-eth-build"><a href="#1-神奇的sandbox-eth-build" class="headerlink" title="1.神奇的sandbox.eth.build"></a>1.神奇的sandbox.eth.build</h2><p>一个栗子🌰:<br><a href="https://eth.build/build#9279763e02828519b2edf8bdcd035d0961bcea07ed803fb13e3cfd178db9cc2c">「ETHbuild」</a></p><h2 id="2-使用ganache-cli创建测试链"><a href="#2-使用ganache-cli创建测试链" class="headerlink" title="2.使用ganache-cli创建测试链"></a>2.使用ganache-cli创建测试链</h2><p>如果你有钱或者有足够的时间去跟水龙头要测试币，当然，你可以跳过这个步骤。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ganache-cli</span><br></pre></td></tr></table></figure><p>打开后应该像这样：</p><p><img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.13.19.png"></p><p>如果你没有ganache，那么你可能需要：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cnpm -g install ganache-cli</span><br><span class="line"><span class="comment">#or</span></span><br><span class="line">npm -g install ganache-cli</span><br></pre></td></tr></table></figure><h2 id="3-更改🌰中的chain模块"><a href="#3-更改🌰中的chain模块" class="headerlink" title="3.更改🌰中的chain模块"></a>3.更改🌰中的chain模块</h2><ul><li><p>第一个chain模块在主页，连接着contract的blockchain。  <img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.21.40.png"></p></li><li><p>第二个chain在wallet下 (<strong>双击wallet进入该模块</strong>) ，也可以连接input过来的chain。我在这里测试是否连接链成功。（右边会显示余额）<img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.27.30.png"></p></li></ul><h2 id="4-填入私钥，做一个拥有100ETH的富豪吧！"><a href="#4-填入私钥，做一个拥有100ETH的富豪吧！" class="headerlink" title="4.填入私钥，做一个拥有100ETH的富豪吧！"></a>4.填入私钥，做一个拥有100ETH的富豪吧！</h2><ul><li><p>启动好ganache我们会拥有10个地址，每个地址拥有100个ETH。现在随机选取一个私钥填入wallet下的private key input端口。<img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.33.45.png"></p></li><li><p>同样在wallet模块下就能查看到余额了!wow，473288$!<img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.35.43.png"></p></li></ul><h2 id="5-部署合约"><a href="#5-部署合约" class="headerlink" title="5.部署合约"></a>5.部署合约</h2><ul><li><p>按esc返回到主页面，点击deploy，你应该会发现address发生了改变，因为我们部署了一个新合约。<img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.38.30.png"></p></li><li><p>查看当前设置的name和owner，你会发现name = xiaoyue,owner = 0x000000···。不过没关系，接下来我们可以更改他们。</p></li></ul><h2 id="6-设置我们自己的名字和地址！"><a href="#6-设置我们自己的名字和地址！" class="headerlink" title="6.设置我们自己的名字和地址！"></a>6.设置我们自己的名字和地址！</h2><ul><li><p>在text中填入我们自己的名字，比如我的另一个名字balala。点击旁边的click me之后会发现transaction的output端口已经将我们的交易信息打出来了，这预示着我们可能更名成功<img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.45.14.png"></p></li><li><p>而在旁边我们调用set_owner函数，并向他转了0个eth。这时合约会记录我们的地址，并自动设置到owner变量中。<img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.50.28.png"></p></li></ul><h2 id="7-查看我们更改后的name-and-owner"><a href="#7-查看我们更改后的name-and-owner" class="headerlink" title="7.查看我们更改后的name and owner"></a>7.查看我们更改后的name and owner</h2><p>显然，更改成功了~✿✿ヽ(°▽°)ノ✿</p><p><img src="https://xiaoyue-blog.oss-cn-hangzhou.aliyuncs.com/html-class-pcl%5D/%E6%88%AA%E5%B1%8F2021-11-15%20%E4%B8%8B%E5%8D%888.53.00.png"></p><h2 id="8-两个小tips"><a href="#8-两个小tips" class="headerlink" title="8.两个小tips"></a>8.两个小tips</h2><ol><li><p>在重新打开别人的项目或者自己给项目添加title后，module中的连接线会断开！如果你发现这个🌰运行不起来，不妨打开wallet和deploy模块查看input的连接线是否断开。</p></li><li><p>鼠标单机一个空白地方，按空格就能快速找到你要的模块了！</p></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;ETHbuild-零代码入门合约开发&quot;&gt;&lt;a href=&quot;#ETHbuild-零代码入门合约开发&quot; class=&quot;headerlink&quot; title=&quot;ETHbuild-零代码入门合约开发&quot;&gt;&lt;/a&gt;ETHbuild-零代码入门合约开发&lt;/h1&gt;&lt;h2 id=&quot;1</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="solidity" scheme="https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/solidity/"/>
+    
+    
+    <category term="区块链,solidity,ethbuild" scheme="https://x1a0.net/tags/%E5%8C%BA%E5%9D%97%E9%93%BE-solidity-ethbuild/"/>
+    
+  </entry>
   
   <entry>
     <title>xmr挖矿脚本分析</title>
@@ -469,28 +495,6 @@ include(&amp;quot;flag.php&amp;quot;)</summary>
     
     
     <category term="PHP" scheme="https://x1a0.net/tags/PHP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>xxe 略微深入一点体验</title>
-    <link href="https://x1a0.net/2020/05/14/142/"/>
-    <id>https://x1a0.net/2020/05/14/142/</id>
-    <published>2020-05-14T09:54:00.000Z</published>
-    <updated>2020-05-14T09:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>![3.PNG](<a href="https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PNG">https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PNG</a><br>  [2<a href="https://oss.x1a0.net/image/2020/05/14/500812336110548/timg.jpg">https://oss.x1a0.net/image/2020/05/14/500812336110548/timg.jpg</a>)</p><hr><p>好了，深入完了。</p><p>![timg.jpg][2]</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;![3.PNG](&lt;a href=&quot;https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PNG&quot;&gt;https://oss.x1a0.net/image/2020/05/14/500332787188515/3.PN</summary>
-      
-    
-    
-    
-    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
-    
     
   </entry>
   

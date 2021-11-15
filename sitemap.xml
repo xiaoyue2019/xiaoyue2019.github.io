@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://x1a0.net/2021/11/15/ETHbuild-%E9%9B%B6%E4%BB%A3%E7%A0%81%E5%85%A5%E9%97%A8%E5%90%88%E7%BA%A6%E5%BC%80%E5%8F%91/</loc>
+    
+    <lastmod>2021-11-15</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://x1a0.net/categories/index.html</loc>
     
     <lastmod>2021-11-10</lastmod>
@@ -354,7 +361,7 @@
 
   <url>
     <loc>https://x1a0.net/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -362,63 +369,70 @@
   
   <url>
     <loc>https://x1a0.net/tags/PHP/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/Git/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/Linux/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/Docker/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/Rust/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/Vscode/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/Windows/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/Hexo/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/tags/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://x1a0.net/tags/%E5%8C%BA%E5%9D%97%E9%93%BE-solidity-ethbuild/</loc>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -427,56 +441,63 @@
   
   <url>
     <loc>https://x1a0.net/categories/Python/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/categories/%E6%9D%82%E9%A1%B9/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/categories/CTF/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/categories/Linux/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/categories/Docker/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/categories/Git/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://x1a0.net/categories/Rust/</loc>
-    <lastmod>2021-11-10</lastmod>
+    <lastmod>2021-11-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/solidity/</loc>
+    <lastmod>2021-11-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
