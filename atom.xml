@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2021-12-12T16:13:36.635Z</updated>
+  <updated>2021-12-13T10:26:28.533Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>event使用小记</title>
+    <link href="https://x1a0.net/2021/12/13/event%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/"/>
+    <id>https://x1a0.net/2021/12/13/event%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/</id>
+    <published>2021-12-13T10:24:28.000Z</published>
+    <updated>2021-12-13T10:26:28.533Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> web3 <span class="keyword">import</span> Web3, main</span><br><span class="line"><span class="keyword">from</span> usdt <span class="keyword">import</span> abi</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> pprint <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">url = <span class="string">&quot;http://127.0.0.1:8545&quot;</span></span><br><span class="line">web3 = Web3(Web3.HTTPProvider(url))</span><br><span class="line">address = web3.toChecksumAddress(<span class="string">&#x27;0xdFB34E20656dbA9133fE13274005A1FC4926C7E3&#x27;</span>)</span><br><span class="line"></span><br><span class="line">contract = web3.eth.contract(address=address, abi=abi)</span><br><span class="line">latest = web3.eth.blockNumber</span><br><span class="line">issueEvents = contract.events.Issue.createFilter(fromBlock=<span class="number">0</span>, toBlock=latest)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ParsingEvent</span>(<span class="params">data</span>):</span></span><br><span class="line">    issueList = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> data:</span><br><span class="line">        issueData = &#123;&#125;</span><br><span class="line">        issueData[<span class="string">&#x27;amount&#x27;</span>] = i[<span class="string">&#x27;args&#x27;</span>][<span class="string">&#x27;amount&#x27;</span>]</span><br><span class="line">        issueData[<span class="string">&#x27;address&#x27;</span>] = i[<span class="string">&#x27;address&#x27;</span>]</span><br><span class="line">        issueData[<span class="string">&#x27;blockNumber&#x27;</span>] = i[<span class="string">&#x27;blockNumber&#x27;</span>]</span><br><span class="line">        issueList.append(issueData)</span><br><span class="line">    <span class="keyword">return</span> issueList</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getIssueEvents</span>(<span class="params">realtime</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        data = issueEvents.get_all_entries()</span><br><span class="line">        pprint(ParsingEvent(data))</span><br><span class="line">        time.sleep(realtime)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    getIssueEvents(<span class="number">10</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>1.写个后端获取暴露个API<br>2.chainlink链上读取<br>3.部署上服务器和ropsten</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span clas</summary>
+      
+    
+    
+    
+    <category term="Python" scheme="https://x1a0.net/categories/Python/"/>
+    
+    <category term="区块链" scheme="https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="Web3.py" scheme="https://x1a0.net/categories/Web3-py/"/>
+    
+    
+    <category term="区块链" scheme="https://x1a0.net/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+    <category term="solidity" scheme="https://x1a0.net/tags/solidity/"/>
+    
+    <category term="Python" scheme="https://x1a0.net/tags/Python/"/>
+    
+    <category term="web3.py" scheme="https://x1a0.net/tags/web3-py/"/>
+    
+  </entry>
   
   <entry>
     <title>web3.py使用小记</title>
@@ -493,29 +527,6 @@
     
     
     <category term="区块链" scheme="https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ENS使用指南（隐藏文章）</title>
-    <link href="https://x1a0.net/2020/07/12/185/"/>
-    <id>https://x1a0.net/2020/07/12/185/</id>
-    <published>2020-07-11T16:00:18.000Z</published>
-    <updated>2020-07-11T16:00:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>pass</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;pass&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    <category term="杂项" scheme="https://x1a0.net/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
   </entry>
