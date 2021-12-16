@@ -1,0 +1,12 @@
+#page_content {
+  font: 1.1em "Noto Sans SC", sans-serif;
+}
+#page_content h2 {
+  font-size: 2em;
+}
+#page_content h3 {
+  font-size: 1.5em;
+}
+#page_content a {
+  font-size: 1.1em;
+}

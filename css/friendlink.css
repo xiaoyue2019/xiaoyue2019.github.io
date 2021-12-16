@@ -1,0 +1,33 @@
+.friendlink {
+  width: 80%;
+  font-size: 1.7em;
+  margin: 0 auto;
+}
+.friendlink .flink_link {
+  color: inherit;
+}
+.friendlink .flink_link .flink_block {
+  height: 5em;
+  display: flex;
+  margin: 3em auto;
+}
+.friendlink .flink_link .flink_block .flink_word {
+  width: 70%;
+}
+.friendlink .flink_link .flink_block .flink_word .flink_name {
+  font-weight: bold;
+}
+.friendlink .flink_link .flink_block .flink_word .flink_desc,
+.friendlink .flink_link .flink_block .flink_word .flink_url {
+  padding-left: 3em;
+  font-size: 0.8em;
+}
+.friendlink .flink_link .flink_block:hover .flink_name {
+  color: #d14e4e;
+}
+.friendlink .flink_link .flink_cover {
+  width: 30%;
+}
+.friendlink .flink_link .flink_cover .flink_img {
+  width: 5em;
+}
