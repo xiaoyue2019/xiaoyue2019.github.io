@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2022-01-20T02:10:41.377Z</updated>
+  <updated>2022-05-09T12:34:22.987Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,41 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2022.5.9日记</title>
+    <link href="https://x1a0.net/2022/05/09/2022-5-9%E6%97%A5%E8%AE%B0/"/>
+    <id>https://x1a0.net/2022/05/09/2022-5-9%E6%97%A5%E8%AE%B0/</id>
+    <published>2022-05-09T12:10:46.000Z</published>
+    <updated>2022-05-09T12:34:22.987Z</updated>
+    
+    <content type="html"><![CDATA[<p>好久没跟新博客了，刚打开微信看到x1a0.net这个域名才发现，原来我还有个博客。</p><p>不想写东西的原因有很多吧，太忙、太累、太麻烦。 恩，我们好像总能给不想做的事情找到很多原因。<br>也可能是感觉标签和分类太难搞了。</p><p>最近一直失眠，通宵。不知道啥原因但是已经好多天没上过课了。</p><p>重温一下了scorpion，不错的美剧，一时兴起又想研究短波通信了。</p><p>好困，背单词去了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;好久没跟新博客了，刚打开微信看到x1a0.net这个域名才发现，原来我还有个博客。&lt;/p&gt;
+&lt;p&gt;不想写东西的原因有很多吧，太忙、太累、太麻烦。 恩，我们好像总能给不想做的事情找到很多原因。&lt;br&gt;也可能是感觉标签和分类太难搞了。&lt;/p&gt;
+&lt;p&gt;最近一直失眠，通宵。不知道啥</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu-install-Oracle</title>
+    <link href="https://x1a0.net/2022/02/26/Ubuntu-install-Oracle/"/>
+    <id>https://x1a0.net/2022/02/26/Ubuntu-install-Oracle/</id>
+    <published>2022-02-25T17:56:14.000Z</published>
+    <updated>2022-02-25T17:56:14.083Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>FISCO-BCOS Caliper压测自动化脚本</title>
@@ -519,51 +554,6 @@
     
     
     <category term="Vscode" scheme="https://x1a0.net/tags/Vscode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python websocket 部署小记</title>
-    <link href="https://x1a0.net/2021/02/08/197/"/>
-    <id>https://x1a0.net/2021/02/08/197/</id>
-    <published>2021-02-07T19:25:00.000Z</published>
-    <updated>2021-02-07T19:26:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># WS server that sends messages at random intervals</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> websockets</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">time</span>(<span class="params">websocket, path</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        now = datetime.datetime.utcnow().isoformat() + <span class="string">&#x27;Z&#x27;</span></span><br><span class="line">        <span class="keyword">await</span> websocket.send(now)</span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(random.random() * <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">start_server = websockets.serve(time, <span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="number">5678</span>)</span><br><span class="line"></span><br><span class="line">asyncio.get_event_loop().run_until_complete(start_server)</span><br><span class="line">asyncio.get_event_loop().run_forever()</span><br></pre></td></tr></table></figure><p>客户端跑不到。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TimeoutError: [Errno 10060] Connect call failed (&#x27;xx&#x27;, 8765)</span><br></pre></td></tr></table></figure><p>端口监听成功的：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lnpt</span><br></pre></td></tr></table></figure><p>centos7 检查防火墙：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --state</span><br></pre></td></tr></table></figure><p>开启状态，检查端口：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --list-ports</span><br></pre></td></tr></table></figure><p>未开放，开启端口：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=5672/tcp --permanent   # 开放5672端口</span><br><span class="line"></span><br><span class="line">firewall-cmd --zone=public --remove-port=5672/tcp --permanent  # 关闭5672端口</span><br><span class="line"></span><br><span class="line">firewall-cmd --reload   # 配置立即生效</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span clas</summary>
-      
-    
-    
-    
-    <category term="Python" scheme="https://x1a0.net/categories/Python/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>制作requirements.txt</title>
-    <link href="https://x1a0.net/2020/12/18/196/"/>
-    <id>https://x1a0.net/2020/12/18/196/</id>
-    <published>2020-12-18T00:52:01.000Z</published>
-    <updated>2020-12-18T00:52:01.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>pipreqs ./ –encoding=utf8</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;pipreqs ./ –encoding=utf8&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    <category term="Python" scheme="https://x1a0.net/categories/Python/"/>
-    
     
   </entry>
   
