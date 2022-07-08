@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2022-05-09T12:34:22.987Z</updated>
+  <updated>2022-07-08T19:05:34.099Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>屠鸭日记1</title>
+    <link href="https://x1a0.net/2022/07/08/%E5%B1%A0%E9%B8%AD%E6%97%A5%E8%AE%B01/"/>
+    <id>https://x1a0.net/2022/07/08/%E5%B1%A0%E9%B8%AD%E6%97%A5%E8%AE%B01/</id>
+    <published>2022-07-08T12:33:08.000Z</published>
+    <updated>2022-07-08T19:05:34.099Z</updated>
+    
+    <content type="html"><![CDATA[<p>词汇量1000<br>2020年7月8日</p><hr><p>忽略，无视<br>ignore, neglect, overlook, pay no attention</p><p>毁坏<br>destruction, destroy, damage</p><p>错误的观点<br>misconception, inaccurate view, mistaken view</p><p>容易达到的<br>accessible, approachable, easy to reach</p><p>检查，调查<br>investigate, inquiry, enquiry, survey, inspect, detect, probe, dig into, look into</p><p>表地点<br>where, place, spot, geographical location</p><p>原因<br>reason, cause, factor, because of, due to, thanks to, as a result of, as a consequence of, result from</p><p>保护<br>protect, guard, safeguard, shield, preserve, conservation</p><p>媒体<br>newspaper, medium, press</p><p>变暖<br>calefy, get warmer, global warming</p><p>遭遇，面对<br>encounter, confront, suffer, face, sustain, run up against</p><p>改变<br>revision, change, alter, turn, modify, conversation, alteration</p><p>重要的<br>key, essential, primary, dominant, vital, important, significant, monumental, critical, imperative, fundamental, crucial</p><p>烦死了 这个pinata 这个护网 耽误掉好多时间</p><p>不看抖音</p><p>不看抖音</p><p>不看抖音</p><p>！！！</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;词汇量1000&lt;br&gt;2020年7月8日&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;忽略，无视&lt;br&gt;ignore, neglect, overlook, pay no attention&lt;/p&gt;
+&lt;p&gt;毁坏&lt;br&gt;destruction, destroy, damage&lt;/p&gt;
+&lt;p&gt;错误</summary>
+      
+    
+    
+    
+    
+    <category term="屠鸭" scheme="https://x1a0.net/tags/%E5%B1%A0%E9%B8%AD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2022.5.28日记</title>
+    <link href="https://x1a0.net/2022/05/28/2022-5-28%E6%97%A5%E8%AE%B0/"/>
+    <id>https://x1a0.net/2022/05/28/2022-5-28%E6%97%A5%E8%AE%B0/</id>
+    <published>2022-05-27T16:42:43.000Z</published>
+    <updated>2022-05-27T16:51:04.277Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天是2022年5月28号</p><p>挺搞笑的一件事，不知道能不能在博客里写哈哈哈。</p><p>现在是凌晨00:43，本来要跟项目方交东西的，先写个日记平复下心情吧。</p><p>有个小伙子说要来教我做人，我以为有二三十个，没想到一个人来了。不知道该不该报警，该说不说报警有点怂。。哈哈哈，但要是有人看到这篇日记一定记得，这种情况得报警。冲进来就嘞着我脖子，我反手抓起双节棍就是一挥。最后他灰溜溜的走了。</p><p>现在问题吧，就是怕他百折不挠的来找我报复，明着来不怕，就怕冷不伶仃的背后来一刀。哈哈哈。这种事情也是可能发生的嘛，要是我哪天不在了，大家一定要来翻看这篇博客。（手动捂脸）</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;今天是2022年5月28号&lt;/p&gt;
+&lt;p&gt;挺搞笑的一件事，不知道能不能在博客里写哈哈哈。&lt;/p&gt;
+&lt;p&gt;现在是凌晨00:43，本来要跟项目方交东西的，先写个日记平复下心情吧。&lt;/p&gt;
+&lt;p&gt;有个小伙子说要来教我做人，我以为有二三十个，没想到一个人来了。不知道该不该报警，该说</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>2022.5.9日记</title>
@@ -506,54 +555,6 @@
     
     
     <category term="Git" scheme="https://x1a0.net/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Peer reports incompatible or unsupported protocol version.</title>
-    <link href="https://x1a0.net/2021/04/28/Peer%20reports%20incompatible%20or%20unsupported%20protocol%20version/"/>
-    <id>https://x1a0.net/2021/04/28/Peer%20reports%20incompatible%20or%20unsupported%20protocol%20version/</id>
-    <published>2021-04-28T06:37:57.000Z</published>
-    <updated>2021-05-04T02:58:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>解决方案：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y nss curl libcurl </span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;解决方案：&lt;/p&gt;
-&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;p</summary>
-      
-    
-    
-    
-    <category term="Git" scheme="https://x1a0.net/categories/Git/"/>
-    
-    
-    <category term="Git" scheme="https://x1a0.net/tags/Git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vscode配置在选项卡中打开新窗口</title>
-    <link href="https://x1a0.net/2021/04/26/vscode%E9%85%8D%E7%BD%AE%E5%9C%A8%E9%80%89%E9%A1%B9%E5%8D%A1%E4%B8%AD%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/"/>
-    <id>https://x1a0.net/2021/04/26/vscode%E9%85%8D%E7%BD%AE%E5%9C%A8%E9%80%89%E9%A1%B9%E5%8D%A1%E4%B8%AD%E6%89%93%E5%BC%80%E6%96%B0%E7%AA%97%E5%8F%A3/</id>
-    <published>2021-04-26T15:04:20.000Z</published>
-    <updated>2021-07-15T18:43:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>workbench.editor.enablePreview</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;workbench.editor.enablePreview&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    
-    <category term="Vscode" scheme="https://x1a0.net/tags/Vscode/"/>
     
   </entry>
   
