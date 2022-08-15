@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2022-08-11T13:38:09.159Z</updated>
+  <updated>2022-08-15T00:52:52.245Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>8.15日记</title>
+    <link href="https://x1a0.net/2022/08/15/8-15%E6%97%A5%E8%AE%B0/"/>
+    <id>https://x1a0.net/2022/08/15/8-15%E6%97%A5%E8%AE%B0/</id>
+    <published>2022-08-15T00:43:03.000Z</published>
+    <updated>2022-08-15T00:52:52.245Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在是8.15早上8:43，房间暗暗的，我一个人</p><p>为什么打开电脑呢，想总结一下这两天来的感悟</p><p>害怕麻烦别人，说不清我到底是利己主义 还是利他主义，要是能有某飞一样的人生领悟该多好：做人嘛，还是自私点好<br>如果这件事对自己有利，就去争取，公平的争取能为自己垫高成功时那份荣誉感的台阶。<strong>不要怕得罪人，你优柔寡断、遇事不决、谄媚的样子才令人讨厌。</strong></p><p><strong>所有痛苦，所有内心的不安全部来自于“火力不足”</strong><br>如果你对一件事情理解的非常透彻，在某个领域或事件上有足够的沉淀、发言权，那么你将不会惧怕一切可能面临的问题<br>所以如果还有什么事情是令你感到害怕、恐惧、心烦意乱的<br>就去解决它，去攻克它吧！自信和行动是解决一切问题的最根本方法论</p><p>不想行动<br>独自一人时面对既定计划产生抵触感<br><strong>尝试强制自己做5分钟吧</strong><br>如果这点强制性都没有<br>那你也别想着出国了。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;现在是8.15早上8:43，房间暗暗的，我一个人&lt;/p&gt;
+&lt;p&gt;为什么打开电脑呢，想总结一下这两天来的感悟&lt;/p&gt;
+&lt;p&gt;害怕麻烦别人，说不清我到底是利己主义 还是利他主义，要是能有某飞一样的人生领悟该多好：做人嘛，还是自私点好&lt;br&gt;如果这件事对自己有利，就去争取，公平的</summary>
+      
+    
+    
+    
+    
+    <category term="日记" scheme="https://x1a0.net/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>8.11日记</title>
@@ -533,29 +557,6 @@
     
     
     <category term="Rust" scheme="https://x1a0.net/tags/Rust/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>win11默认开启hyper-v解决方案</title>
-    <link href="https://x1a0.net/2021/07/16/win11%E9%BB%98%E8%AE%A4%E5%BC%80%E5%90%AFhyper-v%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
-    <id>https://x1a0.net/2021/07/16/win11%E9%BB%98%E8%AE%A4%E5%BC%80%E5%90%AFhyper-v%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</id>
-    <published>2021-07-15T18:42:22.000Z</published>
-    <updated>2021-07-15T18:45:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>快捷键win+x,使用管理员权限打开Windows Powershell<br>关闭：bcdedit /set hypervisorlaunchtype off<br>开启: bcdedit /set hypervisorlaunchtype auto</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;快捷键win+x,使用管理员权限打开Windows Powershell&lt;br&gt;关闭：bcdedit /set hypervisorlaunchtype off&lt;br&gt;开启: bcdedit /set hypervisorlaunchtype auto&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    
-    <category term="Windows" scheme="https://x1a0.net/tags/Windows/"/>
     
   </entry>
   
