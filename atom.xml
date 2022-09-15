@@ -6,7 +6,7 @@
   <link href="https://x1a0.net/atom.xml" rel="self"/>
   
   <link href="https://x1a0.net/"/>
-  <updated>2022-08-15T00:52:52.245Z</updated>
+  <updated>2022-09-15T16:01:07.241Z</updated>
   <id>https://x1a0.net/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>羊了个羊破解攻略-未授权接口</title>
+    <link href="https://x1a0.net/2022/09/15/%E7%BE%8A%E4%BA%86%E4%B8%AA%E7%BE%8A%E7%A0%B4%E8%A7%A3%E6%94%BB%E7%95%A5-%E6%9C%AA%E6%8E%88%E6%9D%83%E6%8E%A5%E5%8F%A3/"/>
+    <id>https://x1a0.net/2022/09/15/%E7%BE%8A%E4%BA%86%E4%B8%AA%E7%BE%8A%E7%A0%B4%E8%A7%A3%E6%94%BB%E7%95%A5-%E6%9C%AA%E6%8E%88%E6%9D%83%E6%8E%A5%E5%8F%A3/</id>
+    <published>2022-09-15T15:16:04.000Z</published>
+    <updated>2022-09-15T16:01:07.241Z</updated>
+    
+    <content type="html"><![CDATA[<p>好久没写过日记了。</p><p>后天雅思考试，记录一下最近的备考情况吧：</p><p>无。</p><p>好，记录完了。</p><p>话说真的不知道要怎么考过… 都有点想不去考了，感觉就是浪费时间。 也没有啥动力。</p><p>说一下最近爆火的羊了个羊吧，好像开发者已经财富自由了。</p><p>最开始是想通过网上的方法，抓包改地图数据，达到第二关，发现太慢了。朋友圈有人几千分，就肯定有别的方法。</p><p>然后想到通过修改返回值数据，让进入游戏时的用户变成别人，突破一天一次的限制，最后胜利了加分是加到自己这里的。</p><p>但是还是太慢了。</p><p>要么写脚本批量搞，但是这也太弱智了。</p><p>最后发现了一个接口</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//cat-match.easygame2021.com/sheep/v1/game/update_user_skin?skin=1</span></span><br></pre></td></tr></table></figure><p>不知道怎么翻译，修改用户皮肤？？ 但是只要发这个包，胜利次数就会+1，我想了下，可能是因为成功之后会有新皮肤出来，</p><p>然后后端程序员通过你获得了新皮肤来判断你的胜利次数。这个皮肤可以一直用1，就意味着这个接口可以无限使用。</p><p>这样就有了无限获得羊的方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET -H <span class="string">&quot;Host:cat-match.easygame2021.com&quot;</span> -H <span class="string">&quot;Connection:keep-alive&quot;</span> -H <span class="string">&quot;t:你的值，抓个包获得&quot;</span> -H <span class="string">&quot;User-Agent:Mozilla/5.0 (Linux; Android 7.1.2; 22041211AC Build/N6F26Q; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/4313 MMWEBSDK/20220805 Mobile Safari/537.36 MMWEBID/2878 MicroMessenger/8.0.27.2220(0x28001B37) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android&quot;</span> -H <span class="string">&quot;charset:utf-8&quot;</span> -H <span class="string">&quot;Accept-Encoding:gzip,compress,br,deflate&quot;</span> -H <span class="string">&quot;content-type:application/json&quot;</span> -H <span class="string">&quot;Referer:https://servicewechat.com/wx141bfb9b73c970a9/15/page-frame.html&quot;</span> <span class="string">&quot;https://cat-match.easygame2021.com/sheep/v1/game/update_user_skin?skin=200&quot;</span></span><br></pre></td></tr></table></figure><p>只要跑一次就有一只羊。</p><p><img src="https://img-blog.csdnimg.cn/7bc90b26023548918f5e92fec391c6b3.png" alt="羊了个羊"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;好久没写过日记了。&lt;/p&gt;
+&lt;p&gt;后天雅思考试，记录一下最近的备考情况吧：&lt;/p&gt;
+&lt;p&gt;无。&lt;/p&gt;
+&lt;p&gt;好，记录完了。&lt;/p&gt;
+&lt;p&gt;话说真的不知道要怎么考过… 都有点想不去考了，感觉就是浪费时间。 也没有啥动力。&lt;/p&gt;
+&lt;p&gt;说一下最近爆火的羊了个羊吧，好像开发者</summary>
+      
+    
+    
+    
+    
+    <category term="渗透测试" scheme="https://x1a0.net/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>8.15日记</title>
@@ -524,31 +551,6 @@
       
     <summary type="html">&lt;p&gt;切片&lt;/p&gt;
 &lt;figure class=&quot;highlight rust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;s</summary>
-      
-    
-    
-    
-    <category term="Rust" scheme="https://x1a0.net/categories/Rust/"/>
-    
-    
-    <category term="Rust" scheme="https://x1a0.net/tags/Rust/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>rust学习第一天</title>
-    <link href="https://x1a0.net/2021/07/26/rust%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9/"/>
-    <id>https://x1a0.net/2021/07/26/rust%E5%AD%A6%E4%B9%A0%E7%AC%AC%E4%B8%80%E5%A4%A9/</id>
-    <published>2021-07-26T07:19:25.000Z</published>
-    <updated>2021-07-27T11:21:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>包引入，取随机数，枚举类使用</p><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> std::io::stdin; <span class="comment">//引入stdin包，通过sdtin下的read_line函数获取命令行返回值</span></span><br><span class="line"><span class="keyword">use</span> rand::Rng; <span class="comment">//引入Rng这个接口，通过rand::thread_rng().gen_range()获取随机数</span></span><br><span class="line"><span class="keyword">use</span> std::cmp::Ordering;<span class="comment">//引入枚举包，通过ordering::xx来控制返回，通过match抓取不同的ordering</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> sec = rand::thread_rng().gen_range(<span class="number">1</span>..<span class="number">101</span>);      </span><br><span class="line">    <span class="built_in">print!</span>(<span class="string">&quot;这个秘密的数是：&#123;&#125;\n&quot;</span>,sec);</span><br><span class="line">    <span class="keyword">loop</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> <span class="keyword">mut</span> string1 = <span class="built_in">String</span>::new();<span class="comment">//声明一个string类型的可变变量string::new()</span></span><br><span class="line">        stdin().read_line(&amp;<span class="keyword">mut</span> string1).expect(<span class="string">&quot;不能读取！\n&quot;</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">let</span> string1:<span class="built_in">i32</span> = <span class="keyword">match</span> string1.trim().parse() &#123; <span class="comment">//变量的覆盖，通过let var_name:type = xx重新覆盖变量，必须声明类型。trim去首尾空，parse转数字，match抓取返回成功和err值并打印。</span></span><br><span class="line">            <span class="literal">Ok</span>(num) =&gt; num,</span><br><span class="line">            <span class="literal">Err</span>(err) =&gt; &#123;</span><br><span class="line">                <span class="built_in">print!</span>(<span class="string">&quot;&#123;&#125;\n&quot;</span>,err);</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">match</span> sec.cmp(&amp;string1) &#123; <span class="comment">//这个是将string1和sec进行比较</span></span><br><span class="line">            Ordering::Greater =&gt; <span class="built_in">print!</span>(<span class="string">&quot;small\n&quot;</span>),</span><br><span class="line">            Ordering::Equal =&gt; &#123;</span><br><span class="line">                <span class="built_in">print!</span>(<span class="string">&quot;win!!\n&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;,</span><br><span class="line">            Ordering::Less =&gt; <span class="built_in">print!</span>(<span class="string">&quot;big\n&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;包引入，取随机数，枚举类使用&lt;/p&gt;
-&lt;figure class=&quot;highlight rust&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;</summary>
       
     
     
