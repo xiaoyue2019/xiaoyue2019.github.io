@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="本来ctfhub技能树搭建过程是放在本地的。为了方便记笔记和学习，sql注入之后还是放到blog里面来。 整数型注入：整数型注入和字符型注入现在理解应该就是闭合差异吧。打开题目能直接发现sql语句： 对id参数没有过滤，这个时候可以直接通过and 跟false和true值来判断是否存在注入。可以注意的是mysql中and优先级要高于or。 然后是order by，这个是一个排序语句： 可以看到，通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="整数型注入、字符型注入">
+<meta property="og:url" content="https://x1a0.net/2020/03/25/37/index.html">
+<meta property="og:site_name" content="XiaoYue">
+<meta property="og:description" content="本来ctfhub技能树搭建过程是放在本地的。为了方便记笔记和学习，sql注入之后还是放到blog里面来。 整数型注入：整数型注入和字符型注入现在理解应该就是闭合差异吧。打开题目能直接发现sql语句： 对id参数没有过滤，这个时候可以直接通过and 跟false和true值来判断是否存在注入。可以注意的是mysql中and优先级要高于or。 然后是order by，这个是一个排序语句： 可以看到，通">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://x1a0.net/iknow/usr/uploads/2020/03/146817926.png">
+<meta property="og:image" content="https://x1a0.net/iknow/usr/uploads/2020/03/142026422.png">
+<meta property="og:image" content="https://x1a0.net/iknow/usr/uploads/2020/03/1796426300.png">
+<meta property="og:image" content="https://x1a0.net/iknow/usr/uploads/2020/03/1145046684.png">
+<meta property="og:image" content="https://x1a0.net/iknow/usr/uploads/2020/03/3085289785.png">
+<meta property="og:image" content="https://x1a0.net/iknow/usr/uploads/2020/03/4142236912.png">
+<meta property="article:published_time" content="2020-03-25T05:53:00.000Z">
+<meta property="article:modified_time" content="2020-03-25T05:55:53.000Z">
+<meta property="article:author" content="肖越">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://x1a0.net/iknow/usr/uploads/2020/03/146817926.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>整数型注入、字符型注入</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="XiaoYue" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2020/03/26/74/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2020/03/24/29/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2020/03/25/37/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2020/03/25/37/&text=整数型注入、字符型注入"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2020/03/25/37/&is_video=false&description=整数型注入、字符型注入"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=整数型注入、字符型注入&body=Check out this article: https://x1a0.net/2020/03/25/37/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2020/03/25/37/&name=整数型注入、字符型注入&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2020/03/25/37/&t=整数型注入、字符型注入"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">整数型注入：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">字符型注入：</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        整数型注入、字符型注入
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">肖越</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-03-25T05:53:00.000Z" itemprop="datePublished">2020-03-25</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>本来ctfhub技能树搭建过程是放在本地的。为了方便记笔记和学习，sql注入之后还是放到blog里面来。</p>
+<h2 id="整数型注入："><a href="#整数型注入：" class="headerlink" title="整数型注入："></a>整数型注入：</h2><p>整数型注入和字符型注入现在理解应该就是闭合差异吧。<br>打开题目能直接发现sql语句：<br><img src="https://x1a0.net/iknow/usr/uploads/2020/03/146817926.png" alt="图片1.png"></p>
+<p>对id参数没有过滤，这个时候可以直接通过and 跟false和true值来判断是否存在注入。<br>可以注意的是mysql中and优先级要高于or。</p>
+<p>然后是order by，这个是一个排序语句：<br><img src="https://x1a0.net/iknow/usr/uploads/2020/03/142026422.png" alt="图片2.png"></p>
+<p>可以看到，通过order by 2 desc 使得这个数据按照第二字段的值降序输出了。当然也可以order by name。那么当order by 3的时候由于没有这个字段将会报错。这时候就能得知字段数为2.</p>
+<p>然后是union语句：<br><img src="https://x1a0.net/iknow/usr/uploads/2020/03/1796426300.png" alt="图片3.png"></p>
+<p>Union操作符可以连接两个select语句，但是结果会被去重。<br>这样我们可以通过union来联合进行我们想要的查询了。<br><img src="https://x1a0.net/iknow/usr/uploads/2020/03/1145046684.png" alt="图片4.png"></p>
+<p>Database可以输出当前数据库。知道数据库后我们去查表：<br>-1 union select 1,group_concat(table_name)from information_schema.tables where table_schema=’sqli’</p>
+<p>首先group_concat:</p>
+<p>该函数返回带有来自一个组的连接的非NULL值的字符串结果。<br>当这个表不止一个的时候，不加这个如果显示位不够就看不到后面的表了。</p>
+<p>information_schema<br>而这张视图下保存了mysql的所有数据。所以我们去他的tables表下寻找数据库是sqli的所有表。</p>
+<p>随后就是查询字段：<br><img src="https://x1a0.net/iknow/usr/uploads/2020/03/3085289785.png" alt="图片5.png"></p>
+<p>-1 union select 1,group_concat(column_name) from information_schema.columns where table_name=’flag’<br>这也是同理，去这个‘牛逼’视图information_schema下的column表中去找flag表中的column_name。。（有点绕但就那么个意思）</p>
+<p>然后就是爆字段值了：<br><img src="https://x1a0.net/iknow/usr/uploads/2020/03/4142236912.png" alt="图片6.png"></p>
+<p>‘牛逼’视图information_schema也就完成了他的价值，最后我们使用原本的表查询即可。</p>
+<p>整个过程可以简化为如下：<br>1.判断，查字段数                    and 1=1     and 1=2     order by<br>2.查数据库                union select 1,database()<br>3.查表    -1 union select 1,group_concat(table_name)from information_schema.tables where table_schema=database()<br>4.查字段    -1 union select 1,group_concat(column_name)from information_schema.columns where table_name=flag<br>5.爆数据    union 1,group_concat(flag) from sqli.flag</p>
+<h2 id="字符型注入："><a href="#字符型注入：" class="headerlink" title="字符型注入："></a>字符型注入：</h2><p>select * from news where id=’1’</p>
+<p>查询语句变成了这样</p>
+<p>估计php代码是</p>
+<p>$sql=”select * from news where id=’$_GET[‘id’]’”</p>
+<p>这样只要注意闭合语句，然后使用整数型注入的攻击链就好了</p>
+<p>1’ unicon select 1,2</p>
+<p>这里好像只能使用# 符号来结束（需要闭合后面那个单引号）</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">整数型注入：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%9A"><span class="toc-number">2.</span> <span class="toc-text">字符型注入：</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2020/03/25/37/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2020/03/25/37/&text=整数型注入、字符型注入"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2020/03/25/37/&is_video=false&description=整数型注入、字符型注入"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=整数型注入、字符型注入&body=Check out this article: https://x1a0.net/2020/03/25/37/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2020/03/25/37/&title=整数型注入、字符型注入"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2020/03/25/37/&name=整数型注入、字符型注入&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2020/03/25/37/&t=整数型注入、字符型注入"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    肖越
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

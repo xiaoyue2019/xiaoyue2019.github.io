@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="在合约中获取以太坊的价格 1234567891011121314151617181920212223242526&#x2F;&#x2F; SPDX-License-Identifier: MITpragma solidity ^0.8.7;import &quot;@chainlink&#x2F;contracts&#x2F;src&#x2F;v0.8&#x2F;interfaces&#x2F;AggregatorV3Interface.sol&quot;;cont">
+<meta property="og:type" content="article">
+<meta property="og:title" content="chainlink学习小记">
+<meta property="og:url" content="https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/index.html">
+<meta property="og:site_name" content="XiaoYue">
+<meta property="og:description" content="在合约中获取以太坊的价格 1234567891011121314151617181920212223242526&#x2F;&#x2F; SPDX-License-Identifier: MITpragma solidity ^0.8.7;import &quot;@chainlink&#x2F;contracts&#x2F;src&#x2F;v0.8&#x2F;interfaces&#x2F;AggregatorV3Interface.sol&quot;;cont">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-07T03:04:41.000Z">
+<meta property="article:modified_time" content="2021-12-07T05:38:58.181Z">
+<meta property="article:author" content="肖越">
+<meta property="article:tag" content="区块链">
+<meta property="article:tag" content="solidity">
+<meta property="article:tag" content="chainlink">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>chainlink学习小记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="XiaoYue" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2021/12/13/web3-py%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/11/25/flask%E8%93%9D%E5%9B%BE%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E7%90%86%E8%A7%A3/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&text=chainlink学习小记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&is_video=false&description=chainlink学习小记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=chainlink学习小记&body=Check out this article: https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&name=chainlink学习小记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&t=chainlink学习小记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        chainlink学习小记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">肖越</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-07T03:04:41.000Z" itemprop="datePublished">2021-12-07</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Solidity/">Solidity</a> › <a class="category-link" href="/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/">区块链</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/chainlink/" rel="tag">chainlink</a>, <a class="tag-link-link" href="/tags/solidity/" rel="tag">solidity</a>, <a class="tag-link-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>在合约中获取以太坊的价格</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: MIT</span></span><br><span class="line">pragma solidity ^<span class="number">0.8</span><span class="number">.7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol&quot;</span>;</span><br><span class="line"></span><br><span class="line">contract PriceConsumerV3 &#123;</span><br><span class="line"></span><br><span class="line">    AggregatorV3Interface internal priceFeed;</span><br><span class="line"></span><br><span class="line">    constructor() &#123;</span><br><span class="line">        <span class="comment">// 喂价合约地址</span></span><br><span class="line">        priceFeed = AggregatorV3Interface(<span class="number">0x9326BFA02ADD2366b30bacB125260Af641031331</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//获取最后一轮价格</span></span><br><span class="line">    <span class="function">function <span class="title">getLatestPrice</span><span class="params">()</span> <span class="keyword">public</span> view <span class="title">returns</span> <span class="params">(<span class="keyword">int</span>)</span> </span>&#123;</span><br><span class="line">        (</span><br><span class="line">            uint80 roundID, </span><br><span class="line">            <span class="keyword">int</span> price,</span><br><span class="line">            uint startedAt,</span><br><span class="line">            uint timeStamp,</span><br><span class="line">            uint80 answeredInRound</span><br><span class="line">        ) = priceFeed.latestRoundData();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> price;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: MIT</span></span><br><span class="line">pragma solidity ^<span class="number">0.8</span><span class="number">.7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;@chainlink/contracts/src/v0.8/VRFConsumerBase.sol&quot;</span>;</span><br><span class="line"></span><br><span class="line">contract RandomNumberConsumer is VRFConsumerBase &#123;</span><br><span class="line">    </span><br><span class="line">    bytes32 internal keyHash;</span><br><span class="line">    uint256 internal fee;</span><br><span class="line">    </span><br><span class="line">    uint256 <span class="keyword">public</span> randomResult;</span><br><span class="line">    bytes32 <span class="keyword">public</span> resultId;</span><br><span class="line"></span><br><span class="line">    constructor() </span><br><span class="line">        VRFConsumerBase(</span><br><span class="line">            <span class="number">0xdD3782915140c8f3b190B5D67eAc6dc5760C46E9</span>, <span class="comment">// VRF Coordinator</span></span><br><span class="line">            <span class="number">0xa36085F69e2889c224210F603D836748e7dC0088</span>  <span class="comment">// LINK Token</span></span><br><span class="line">        )</span><br><span class="line">    &#123;</span><br><span class="line">        keyHash = <span class="number">0x6c3699283bda56ad74f6b855546325b68d482e983852a7a82979cc4807b641f4</span>;</span><br><span class="line">        fee = <span class="number">0.1</span> * <span class="number">10</span> ** <span class="number">18</span>; <span class="comment">// 0.1 LINK (Varies by network)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//请求函数</span></span><br><span class="line">    <span class="function">function <span class="title">getRandomNumber</span><span class="params">()</span> <span class="keyword">public</span> <span class="title">returns</span> <span class="params">(bytes32 requestId)</span> </span>&#123;</span><br><span class="line">        require(LINK.balanceOf(address(<span class="keyword">this</span>)) &gt;= fee, <span class="string">&quot;Not enough LINK - fill contract with faucet&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> requestRandomness(keyHash, fee);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//回调函数</span></span><br><span class="line">    <span class="function">function <span class="title">fulfillRandomness</span><span class="params">(bytes32 requestId, uint256 randomness)</span> internal override </span>&#123;</span><br><span class="line">        randomResult = randomness;</span><br><span class="line">        resultId = requestId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在合约中使用随机数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: MIT</span></span><br><span class="line">pragma solidity <span class="number">0.8</span><span class="number">.7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;@chainlink/contracts/src/v0.8/VRFConsumerBase.sol&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;@chainlink/contracts/src/v0.8/ConfirmedOwner.sol&quot;</span>;</span><br><span class="line"></span><br><span class="line">contract VRFD20 is VRFConsumerBase, ConfirmedOwner(msg.sender) &#123;</span><br><span class="line">    uint256 <span class="keyword">private</span> constant ROLL_IN_PROGRESS = <span class="number">42</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//定义公钥和获取随机数需要的费用</span></span><br><span class="line">    bytes32 <span class="keyword">private</span> s_keyHash;</span><br><span class="line">    uint256 <span class="keyword">private</span> s_fee;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// requestID和地址之间的映射 和 地址和骰子值之间的映射</span></span><br><span class="line">    mapping(bytes32 =&gt; address) <span class="keyword">private</span> s_rollers;</span><br><span class="line">    mapping(address =&gt; uint256) <span class="keyword">private</span> s_results;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 随机数返回事件 随机数中requestID和地址绑定事件</span></span><br><span class="line">    <span class="function">event <span class="title">DiceRolled</span><span class="params">(bytes32 indexed requestId, address indexed roller)</span></span>;</span><br><span class="line">    <span class="function">event <span class="title">DiceLanded</span><span class="params">(bytes32 indexed requestId, uint256 indexed result)</span></span>;</span><br><span class="line"></span><br><span class="line">    constructor(address vrfCoordinator, address link, bytes32 keyHash, uint256 fee)</span><br><span class="line">        VRFConsumerBase(vrfCoordinator, link)</span><br><span class="line">    &#123;</span><br><span class="line">        s_keyHash = keyHash;</span><br><span class="line">        s_fee = fee;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//掷骰子</span></span><br><span class="line">    <span class="function">function <span class="title">rollDice</span><span class="params">(address roller)</span> <span class="keyword">public</span> onlyOwner <span class="title">returns</span> <span class="params">(bytes32 requestId)</span> </span>&#123;</span><br><span class="line">        require(LINK.balanceOf(address(<span class="keyword">this</span>)) &gt;= s_fee, <span class="string">&quot;Not enough LINK to pay fee&quot;</span>);</span><br><span class="line">        require(s_results[roller] == <span class="number">0</span>, <span class="string">&quot;Already rolled&quot;</span>);</span><br><span class="line">        requestId = requestRandomness(s_keyHash, s_fee);</span><br><span class="line">        s_rollers[requestId] = roller;</span><br><span class="line">        <span class="comment">//如果是roll_in_progress就说明没有掷成功</span></span><br><span class="line">        s_results[roller] = ROLL_IN_PROGRESS;</span><br><span class="line">        <span class="function">emit <span class="title">DiceRolled</span><span class="params">(requestId, roller)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//回调函数</span></span><br><span class="line">    <span class="function">function <span class="title">fulfillRandomness</span><span class="params">(bytes32 requestId, uint256 randomness)</span> internal override </span>&#123;</span><br><span class="line">        uint256 d20Value = (randomness % <span class="number">20</span>) + <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//callback更新roll_in_progress，通过s_rollers找到address，通过address设置骰子返回值</span></span><br><span class="line">        s_results[s_rollers[requestId]] = d20Value;</span><br><span class="line">        <span class="function">emit <span class="title">DiceLanded</span><span class="params">(requestId, d20Value)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">function <span class="title">house</span><span class="params">(address player)</span> <span class="keyword">public</span> view <span class="title">returns</span> <span class="params">(string memory)</span> </span>&#123;</span><br><span class="line">        require(s_results[player] != <span class="number">0</span>, <span class="string">&quot;Dice not rolled&quot;</span>);</span><br><span class="line">        require(s_results[player] != ROLL_IN_PROGRESS, <span class="string">&quot;Roll in progress&quot;</span>);</span><br><span class="line">        <span class="comment">// 通过地址获取随机数，分配房子</span></span><br><span class="line">        <span class="keyword">return</span> getHouseName(s_results[player]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//转出link函数</span></span><br><span class="line">    <span class="function">function <span class="title">withdrawLINK</span><span class="params">(address to, uint256 value)</span> <span class="keyword">public</span> onlyOwner </span>&#123;</span><br><span class="line">        require(LINK.transfer(to, value), <span class="string">&quot;Not enough LINK&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">function <span class="title">setKeyHash</span><span class="params">(bytes32 keyHash)</span> <span class="keyword">public</span> onlyOwner </span>&#123;</span><br><span class="line">        s_keyHash = keyHash;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">function <span class="title">keyHash</span><span class="params">()</span> <span class="keyword">public</span> view <span class="title">returns</span> <span class="params">(bytes32)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s_keyHash;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">function <span class="title">setFee</span><span class="params">(uint256 fee)</span> <span class="keyword">public</span> onlyOwner </span>&#123;</span><br><span class="line">        s_fee = fee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">function <span class="title">fee</span><span class="params">()</span> <span class="keyword">public</span> view <span class="title">returns</span> <span class="params">(uint256)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s_fee;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">function <span class="title">getHouseName</span><span class="params">(uint256 id)</span> <span class="keyword">private</span> pure <span class="title">returns</span> <span class="params">(string memory)</span> </span>&#123;</span><br><span class="line">        string[<span class="number">20</span>] memory houseNames = [</span><br><span class="line">            <span class="string">&quot;Targaryen&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Lannister&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Stark&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Tyrell&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Baratheon&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Martell&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Tully&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Bolton&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Greyjoy&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Arryn&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Frey&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Mormont&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Tarley&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Dayne&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Umber&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Valeryon&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Manderly&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Clegane&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Glover&quot;</span>,</span><br><span class="line">            <span class="string">&quot;Karstark&quot;</span></span><br><span class="line">        ];</span><br><span class="line">        <span class="keyword">return</span> houseNames[id - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在合约中调用api</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// SPDX-License-Identifier: MIT</span></span><br><span class="line">pragma solidity ^<span class="number">0.8</span><span class="number">.7</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;@chainlink/contracts/src/v0.8/ChainlinkClient.sol&quot;</span>;</span><br><span class="line"></span><br><span class="line">contract APIConsumer is ChainlinkClient &#123;</span><br><span class="line">    using Chainlink <span class="keyword">for</span> Chainlink.Request;</span><br><span class="line">  </span><br><span class="line">    uint256 <span class="keyword">public</span> volume;</span><br><span class="line">    </span><br><span class="line">    address <span class="keyword">private</span> oracle;</span><br><span class="line">    bytes32 <span class="keyword">private</span> jobId;</span><br><span class="line">    uint256 <span class="keyword">private</span> fee;</span><br><span class="line"></span><br><span class="line">    constructor() &#123;</span><br><span class="line">        setPublicChainlinkToken();</span><br><span class="line">        oracle = <span class="number">0xc57B33452b4F7BB189bB5AfaE9cc4aBa1f7a4FD8</span>;</span><br><span class="line">        jobId = <span class="string">&quot;d5270d1c311941d0b08bead21fea7747&quot;</span>;</span><br><span class="line">        fee = <span class="number">0.1</span> * <span class="number">10</span> ** <span class="number">18</span>; <span class="comment">// (Varies by network and job)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">function <span class="title">requestVolumeData</span><span class="params">()</span> <span class="keyword">public</span> <span class="title">returns</span> <span class="params">(bytes32 requestId)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Chainlink.Request memory request = buildChainlinkRequest(jobId, address(<span class="keyword">this</span>), <span class="keyword">this</span>.fulfill.selector);</span><br><span class="line"></span><br><span class="line">        request.add(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;https://min-api.cryptocompare.com/data/pricemultifull?fsyms=ETH&amp;tsyms=USD&quot;</span>);</span><br><span class="line"></span><br><span class="line">        request.add(<span class="string">&quot;path&quot;</span>, <span class="string">&quot;RAW.ETH.USD.OPENHOUR&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sendChainlinkRequestTo(oracle, request, fee);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">function <span class="title">fulfill</span><span class="params">(bytes32 _requestId, uint256 _volume)</span> <span class="keyword">public</span> <span class="title">recordChainlinkFulfillment</span><span class="params">(_requestId)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        volume = _volume;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&text=chainlink学习小记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&is_video=false&description=chainlink学习小记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=chainlink学习小记&body=Check out this article: https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&title=chainlink学习小记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&name=chainlink学习小记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2021/12/07/chainlink%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/&t=chainlink学习小记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    肖越
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

