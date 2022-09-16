@@ -671,14 +671,14 @@
   </url>
   
   <url>
-    <loc>https://x1a0.net/categories/Linux/</loc>
+    <loc>https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://x1a0.net/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/</loc>
+    <loc>https://x1a0.net/categories/Linux/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -713,14 +713,14 @@
   </url>
   
   <url>
-    <loc>https://x1a0.net/categories/Rust/</loc>
+    <loc>https://x1a0.net/categories/Flask/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://x1a0.net/categories/Flask/</loc>
+    <loc>https://x1a0.net/categories/Rust/</loc>
     <lastmod>2022-09-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
