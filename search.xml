@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>解决M1芯片MacOS输入法卡顿问题</title>
+      <link href="/2022/%E8%A7%A3%E5%86%B3M1%E8%8A%AF%E7%89%87MacOS%E8%BE%93%E5%85%A5%E6%B3%95%E5%8D%A1%E9%A1%BF%E9%97%AE%E9%A2%98/"/>
+      <url>/2022/%E8%A7%A3%E5%86%B3M1%E8%8A%AF%E7%89%87MacOS%E8%BE%93%E5%85%A5%E6%B3%95%E5%8D%A1%E9%A1%BF%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<p>很离谱，在浏览器的输入框内输入时就会卡顿、延时。</p><p>应该不是重装的问题，因为系统是一致的。</p><p>别的地方不会，例如vscode、微信聊天框。 我都怀疑是键盘记录了… 查看input标签记我的私钥。</p><p>最后发现是<strong>键盘-文本-把里面的输入码删掉</strong>就好了。</p><p>之前为了不用搜狗，又舍不得搜狗的短语库，就想着把搜狗的短语库导入Mac</p><p>还是老老实实用搜狗把。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Github+Hexo+自定义域名=博客</title>
       <link href="/2022/Github-Hexo-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D-%E5%8D%9A%E5%AE%A2/"/>
       <url>/2022/Github-Hexo-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D-%E5%8D%9A%E5%AE%A2/</url>
