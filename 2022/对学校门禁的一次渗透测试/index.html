@@ -14,7 +14,7 @@
 <meta property="og:description" content="疫情当前，进出校园成了一大难题。 不少大学生直呼回到了高三的生活。 我们学校之前是人工看审批报告，截几张图蒙混过关也可以。但后来装了人脸识别+身份证验证+健康码验证之后，我们的快乐就没了。 本着 “我不黑你总会有人黑你甚至翻墙钻狗洞出校门” 的心情，我对这个门禁系统进行了一次渗透测试。 2022-10-08，图书馆，单词背不进去。  首先，这个门禁系统能对接钉钉审批，肯定要联网 只要你联网就好办">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-08T13:04:34.000Z">
-<meta property="article:modified_time" content="2022-10-08T13:37:15.639Z">
+<meta property="article:modified_time" content="2022-10-08T14:05:25.869Z">
 <meta property="article:author" content="xiaoyue">
 <meta property="article:tag" content="区块链,网络安全,渗透测试,IoT">
 <meta name="twitter:card" content="summary">
@@ -158,7 +158,11 @@
 <p>共有7个，从30到36</p>
 <p>5555-5585 是adb调试桥的端口，一般这种扫码机器都是比较垃圾的安卓机</p>
 <p>直接就是su权限</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">adb connect x.x.x.x</span><br><span class="line">adb -s x.x.x.x shell</span><br><span class="line">su</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">既然是su权限就方便了很多</span><br><span class="line"></span><br><span class="line">先查看包：</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">pm list packages -3</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb connect x.x.x.x</span><br><span class="line">adb -s x.x.x.x shell</span><br><span class="line">su</span><br></pre></td></tr></table></figure>
+
+<p>既然是su权限就方便了很多</p>
+<p>先查看包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm list packages -3</span><br></pre></td></tr></table></figure>
 
 <p>我是通过<code>top</code>这个命令，确定的当前运行的是一个叫“xx门神”的程序（还是打个码吧）</p>
 <p>找到pid后查看他的log</p>
