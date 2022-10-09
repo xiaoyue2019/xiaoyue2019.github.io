@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>羊了个羊破解攻略——未授权接口</title>
+      <link href="/2022/%E7%BE%8A%E4%BA%86%E4%B8%AA%E7%BE%8A%E7%A0%B4%E8%A7%A3%E6%94%BB%E7%95%A5%E2%80%94%E2%80%94%E6%9C%AA%E6%8E%88%E6%9D%83%E6%8E%A5%E5%8F%A3/"/>
+      <url>/2022/%E7%BE%8A%E4%BA%86%E4%B8%AA%E7%BE%8A%E7%A0%B4%E8%A7%A3%E6%94%BB%E7%95%A5%E2%80%94%E2%80%94%E6%9C%AA%E6%8E%88%E6%9D%83%E6%8E%A5%E5%8F%A3/</url>
+      
+        <content type="html"><![CDATA[<p>之前因为<code>rm -rf</code>，导致hexo文件也丢失了，</p><p>现在慢慢找回来这些文章。</p><p>这是羊了个羊出来第二天搞的，现在应该不行了。</p><hr><p>好久没写过日记了。</p><p>后天雅思考试，记录一下最近的备考情况吧：</p><p>无。</p><p>好，记录完了。</p><p>话说真的不知道要怎么考过… 都有点想不去考了，感觉就是浪费时间。 也没有啥动力。</p><p>说一下最近爆火的羊了个羊吧，好像开发者已经财富自由了。</p><p>最开始是想通过网上的方法，抓包改地图数据，达到第二关，发现太慢了。朋友圈有人几千分，就肯定有别的方法。</p><p>然后想到通过修改返回值数据，让进入游戏时的用户变成别人，突破一天一次的限制，最后胜利了加分是加到自己这里的。</p><p>但是还是太慢了。</p><p>要么写脚本批量搞，但是这也太弱智了。</p><p>最后发现了一个接口</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cat-match.easygame2021.com/sheep/v1/game/update_user_skin?skin=1</span><br></pre></td></tr></table></figure><p>不知道怎么翻译，修改用户皮肤？？ 但是只要发这个包，胜利次数就会+1，我想了下，可能是因为成功之后会有新皮肤出来，</p><p>然后后端程序员通过你获得了新皮肤来判断你的胜利次数。这个皮肤可以一直用1，就意味着这个接口可以无限使用。</p><p>这样就有了无限获得羊的方法：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET -H <span class="string">&quot;Host:cat-match.easygame2021.com&quot;</span> -H <span class="string">&quot;Connection:keep-alive&quot;</span> -H <span class="string">&quot;t:你的值，抓个包获得&quot;</span> -H <span class="string">&quot;User-Agent:Mozilla/5.0 (Linux; Android 7.1.2; 22041211AC Build/N6F26Q; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/86.0.4240.99 XWEB/4313 MMWEBSDK/20220805 Mobile Safari/537.36 MMWEBID/2878 MicroMessenger/8.0.27.2220(0x28001B37) WeChat/arm64 Weixin NetType/WIFI Language/zh_CN ABI/arm64 MiniProgramEnv/android&quot;</span> -H <span class="string">&quot;charset:utf-8&quot;</span> -H <span class="string">&quot;Accept-Encoding:gzip,compress,br,deflate&quot;</span> -H <span class="string">&quot;content-type:application/json&quot;</span> -H <span class="string">&quot;Referer:https://servicewechat.com/wx141bfb9b73c970a9/15/page-frame.html&quot;</span> <span class="string">&quot;https://cat-match.easygame2021.com/sheep/v1/game/update_user_skin?skin=200&quot;</span></span><br></pre></td></tr></table></figure><p>只要跑一次就有一只羊。</p><p><img src="https://img-blog.csdnimg.cn/7bc90b26023548918f5e92fec391c6b3.png" alt="羊了个羊"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>对学校门禁的一次渗透测试</title>
       <link href="/2022/%E5%AF%B9%E5%AD%A6%E6%A0%A1%E9%97%A8%E7%A6%81%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
       <url>/2022/%E5%AF%B9%E5%AD%A6%E6%A0%A1%E9%97%A8%E7%A6%81%E7%9A%84%E4%B8%80%E6%AC%A1%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</url>
