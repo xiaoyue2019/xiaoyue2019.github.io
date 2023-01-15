@@ -4,6 +4,32 @@
   
     
     <entry>
+      <title>微信红包算法分析——怎么抢到最多?</title>
+      <link href="/2023/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E6%80%8E%E4%B9%88%E6%8A%A2%E5%88%B0%E6%9C%80%E5%A4%9A/"/>
+      <url>/2023/%E5%BE%AE%E4%BF%A1%E7%BA%A2%E5%8C%85%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90%E2%80%94%E2%80%94%E6%80%8E%E4%B9%88%E6%8A%A2%E5%88%B0%E6%9C%80%E5%A4%9A/</url>
+      
+        <content type="html"><![CDATA[<p>失败告终</p><p>以下是repo地址：</p><p><a href="https://github.com/xiaoyue2019/redpag">https://github.com/xiaoyue2019/redpag</a></p><p>以下是关键代码：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">generate_red_bag</span>(<span class="params">remain_money,remain_red_bag</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    剩余金额\n</span></span><br><span class="line"><span class="string">    剩余红包数</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> remain_money &lt;= <span class="number">0</span>:</span><br><span class="line">        exit(<span class="string">&quot;出错，剩余红包金额为0&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> remain_red_bag == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">round</span>(remain_money,<span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 计算上水位</span></span><br><span class="line">    water_bottom = <span class="number">0.01</span></span><br><span class="line">    water_top1 = <span class="built_in">round</span>(remain_money / remain_red_bag * <span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">    water_top2 = <span class="built_in">round</span>(remain_money - <span class="built_in">round</span>(water_bottom*(remain_red_bag-<span class="number">1</span>),<span class="number">2</span>),<span class="number">2</span>)</span><br><span class="line">    water_top = <span class="built_in">min</span>(water_top1,water_top2)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算随机数和余数</span></span><br><span class="line">    water_radom = <span class="built_in">round</span>(random.uniform(water_bottom,water_top),<span class="number">2</span>)</span><br><span class="line">    water_remainder = <span class="built_in">round</span>(water_top % water_radom,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 根据余数计算红包金额</span></span><br><span class="line">    <span class="keyword">if</span> water_remainder &gt; water_bottom:</span><br><span class="line">        current_money = water_radom</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        current_money = water_bottom</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> current_money</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>daily routine</title>
+      <link href="/2022/daily-routine/"/>
+      <url>/2022/daily-routine/</url>
+      
+        <content type="html"><![CDATA[<p>May be, this is my first English <strong>diary</strong>. Now, <strong>everybody</strong> go home <strong>without</strong> me. I stay in the <strong>dormitory</strong> which should have included four people. I have to say, I feel <strong>solitary</strong> very much. But this not is most make me feel said, it is my IELTS score. I should have been a great score now, if I do, the offer of <strong>Sydney</strong> school will be got with me.</p><p>Sometimes, I even can’t <strong>recognize</strong> the paper which I <strong>wrote</strong>. I don’t think the major reason that My word power. <strong>wether</strong> I have thinking way of English is <strong>essential</strong>.</p><p>I can’t write more…</p><p>All right, words power is important too. I don’t no why there are many false words.</p><hr><p>Maybe, this is my first English <strong>diary</strong>. Now, <strong>everybody</strong> go home <strong>without</strong> me. I stay in the <strong>dormitory</strong> which should have included four people. I have to say, I feel <strong>solitary</strong> very much. But this is not what makes me feel said, it is my IELTS score. I should have  a great score now. If I do, the offer of <strong>Sydney</strong> school will be got with me.<br>Sometimes, I even can’t <strong>recognize</strong> the paper which I <strong>wrote</strong>. I don’t think the major reason that My word power. <strong>wether</strong>  I think of English is <strong>essential</strong>.<br>I can’t write more…</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一种将墨墨单词导入QWERTY-LEARNER的方法</title>
       <link href="/2022/%E4%B8%80%E7%A7%8D%E5%B0%86%E5%A2%A8%E5%A2%A8%E5%8D%95%E8%AF%8D%E5%AF%BC%E5%85%A5QWERTY-LEARNER%E7%9A%84%E6%96%B9%E6%B3%95/"/>
       <url>/2022/%E4%B8%80%E7%A7%8D%E5%B0%86%E5%A2%A8%E5%A2%A8%E5%8D%95%E8%AF%8D%E5%AF%BC%E5%85%A5QWERTY-LEARNER%E7%9A%84%E6%96%B9%E6%B3%95/</url>
