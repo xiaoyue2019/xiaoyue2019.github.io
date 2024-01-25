@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="很久没写过文章了，今天来写点什么吧。 最近有客户有需求实时提醒，之前用的是server酱，现在想自己搞一个。 通过微信订阅号自己提醒。 微信公众号发送消息好像是有限的，只能通过模板消息来发送。 这时候就需要搞清楚相应的接口：  获取access_token，和两个发送消息的api url 接下来只要构造好消息体，然后发送消息就可以了。 因为是要写一个模块，我们抽象出来一个client用作获取acc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信公众号消息推送SDK for Python">
+<meta property="og:url" content="https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/index.html">
+<meta property="og:site_name" content="XiaoYue">
+<meta property="og:description" content="很久没写过文章了，今天来写点什么吧。 最近有客户有需求实时提醒，之前用的是server酱，现在想自己搞一个。 通过微信订阅号自己提醒。 微信公众号发送消息好像是有限的，只能通过模板消息来发送。 这时候就需要搞清楚相应的接口：  获取access_token，和两个发送消息的api url 接下来只要构造好消息体，然后发送消息就可以了。 因为是要写一个模块，我们抽象出来一个client用作获取acc">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imags.ximutech.cn/i/2024/01/25/owb0gc.png">
+<meta property="article:published_time" content="2024-01-25T07:02:38.000Z">
+<meta property="article:modified_time" content="2024-01-25T07:33:50.003Z">
+<meta property="article:author" content="xiaoyue">
+<meta property="article:tag" content="区块链,网络安全,渗透测试,IoT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imags.ximutech.cn/i/2024/01/25/owb0gc.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>微信公众号消息推送SDK for Python</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tag/">标签</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/mac-air-%E8%93%9D%E7%89%99%E6%96%AD%E8%BF%9E/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&text=微信公众号消息推送SDK for Python"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&is_video=false&description=微信公众号消息推送SDK for Python"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=微信公众号消息推送SDK for Python&body=Check out this article: https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&name=微信公众号消息推送SDK for Python&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&t=微信公众号消息推送SDK for Python"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        微信公众号消息推送SDK for Python
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">xiaoyue</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-01-25T07:02:38.000Z" itemprop="datePublished">2024-01-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>很久没写过文章了，今天来写点什么吧。</p>
+<p>最近有客户有需求实时提醒，之前用的是server酱，现在想自己搞一个。</p>
+<p>通过微信订阅号自己提醒。</p>
+<p>微信公众号发送消息好像是有限的，只能通过模板消息来发送。</p>
+<p>这时候就需要搞清楚相应的接口：</p>
+<p><img src="https://imags.ximutech.cn/i/2024/01/25/owb0gc.png" alt="image"></p>
+<p>获取access_token，和两个发送消息的api url</p>
+<p>接下来只要构造好消息体，然后发送消息就可以了。</p>
+<p>因为是要写一个模块，我们抽象出来一个client用作获取access和发送消息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> httpx</span><br><span class="line"><span class="keyword">from</span> .loggings <span class="keyword">import</span> logger</span><br><span class="line"><span class="keyword">from</span> .consts <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Client</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, appid, appsecret</span>):</span><br><span class="line">        self.appid = appid</span><br><span class="line">        self.appsecret = appsecret</span><br><span class="line">        self.access = self.get_access_token()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_request</span>(<span class="params">self, method, url, params=<span class="literal">None</span>, data=<span class="literal">None</span>, timeout=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">if</span> params <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            params = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> method == <span class="string">&#x27;GET&#x27;</span>:</span><br><span class="line">            result = httpx.get(url, params=params)</span><br><span class="line">        <span class="keyword">elif</span> method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">            result =  httpx.post(url, json=data, params=params, timeout=timeout)</span><br><span class="line">        result.raise_for_status()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> result.json().get(<span class="string">&#x27;errcode&#x27;</span>):</span><br><span class="line">            logger.error(<span class="string">f&quot;[-] 访问出错：<span class="subst">&#123;result.json()&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> result.json()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_access_token</span>(<span class="params">self, appid=<span class="literal">None</span>, appsecret=<span class="literal">None</span></span>):</span><br><span class="line">        <span class="keyword">if</span> appid <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            appid = self.appid</span><br><span class="line">        <span class="keyword">if</span> appsecret <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            appsecret = self.appsecret</span><br><span class="line"></span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">&quot;grant_type&quot;</span>: <span class="string">&quot;client_credential&quot;</span>,</span><br><span class="line">            <span class="string">&quot;appid&quot;</span>: self.appid,</span><br><span class="line">            <span class="string">&quot;secret&quot;</span>: self.appsecret,</span><br><span class="line">            <span class="string">&quot;force_refresh&quot;</span>: <span class="literal">False</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        result = self._request(<span class="string">&#x27;POST&#x27;</span>, GET_ACCESS_TOKEN, data=data)</span><br><span class="line">        <span class="keyword">return</span> result[<span class="string">&#x27;access_token&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这样client的_request处理api返回错误，只要失败就返回空，然后日志打印出来错误</p>
+<p>这样的好处是，后续逻辑中可以判断:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rep = client._request(...)</span><br><span class="line"><span class="keyword">if</span> rep:</span><br><span class="line">    <span class="comment"># do something</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="comment"># do something else</span></span><br></pre></td></tr></table></figure>
+
+<p>然后再搞个发送模版消息的类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ..client <span class="keyword">import</span> Client</span><br><span class="line"><span class="keyword">from</span> ..loggings <span class="keyword">import</span> logger</span><br><span class="line"><span class="keyword">from</span> ..consts <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SendMsgTemplate</span>(<span class="title class_ inherited__">Client</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, appid, appsecret</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(appid, appsecret)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">send_msg_template</span>(<span class="params">self, to_user, template_id, content, url=<span class="string">&quot;&quot;</span></span>):</span><br><span class="line">        send_data = &#123;</span><br><span class="line">           <span class="string">&quot;touser&quot;</span>:to_user,</span><br><span class="line">           <span class="string">&quot;template_id&quot;</span>:template_id,</span><br><span class="line">           <span class="string">&quot;data&quot;</span>:content,</span><br><span class="line">           <span class="string">&quot;url&quot;</span>:url           </span><br><span class="line">        &#125;</span><br><span class="line">        res = self._request(<span class="string">&quot;POST&quot;</span>, SEND_TEXT_MSG_TEMPLATE, data=send_data, params=&#123;<span class="string">&quot;ACCESS_TOKEN&quot;</span>: self.access&#125;)</span><br><span class="line">        <span class="keyword">if</span> res:</span><br><span class="line">            logger.info(<span class="string">&quot;发送消息模板成功&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            logger.error(<span class="string">&quot;发送消息模板失败&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这里要注意的是content格式为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">content = &#123;</span><br><span class="line">    <span class="string">&quot;first&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;value&quot;</span>: <span class="string">&quot;first msg&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;keyword1&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;value&quot;</span>: <span class="string">&quot;keyword1 msg&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之后调用发送就行了：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> wechatMsgPushSDK.tools.send <span class="keyword">import</span> SendMsg</span><br><span class="line">send = SendMsg(<span class="string">&#x27;appid&#x27;</span>, <span class="string">&#x27;appsecret&#x27;</span>)</span><br><span class="line">send.send_msg(<span class="string">&#x27;openid&#x27;</span>, <span class="string">&#x27;给你男朋友买饭了, 宝, 别生气了&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>详细代码在GitHub：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ximutech/wechatMsgPushSDK">https://github.com/ximutech/wechatMsgPushSDK</a></p>
+<p>不成熟还未开源，后续会完善，需要公众号回复1获取源码</p>
+<hr>
+<p>再来看看loggings模块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">setup_logger</span>(<span class="params">log_file_name=<span class="string">&#x27;./logs/app.log&#x27;</span></span>):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建日志目录</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">&#x27;logs&#x27;</span>):</span><br><span class="line">        os.mkdir(<span class="string">&#x27;logs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建一个日志记录器</span></span><br><span class="line">    logger = logging.getLogger(<span class="string">&#x27;my_logger&#x27;</span>)</span><br><span class="line">    logger.setLevel(logging.DEBUG)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建一个文件处理程序，将日志写入到指定文件</span></span><br><span class="line">    log_file_path = os.path.join(os.getcwd(), log_file_name)</span><br><span class="line">    file_handler = logging.FileHandler(log_file_path)</span><br><span class="line">    file_handler.setLevel(logging.DEBUG)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建一个格式化器，定义日志输出的格式</span></span><br><span class="line">    formatter = logging.Formatter(<span class="string">&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;</span>)</span><br><span class="line">    file_handler.setFormatter(formatter)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将处理程序添加到记录器</span></span><br><span class="line">    logger.addHandler(file_handler)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> logger</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在模块被导入时，执行日志记录器的设置</span></span><br><span class="line">logger = setup_logger()</span><br></pre></td></tr></table></figure>
+
+<p>果真chatGPT是个呆瓜，以前错误处理问chatGPT他给的处理方法及其复杂，因为我想捕获错误行到文件。</p>
+<p>后来发现logger就有这个功能，只要设置一个格式化就行了。</p>
+<p>Formatter这个类的解析中有格式化参数。错误行时lineno，错误路径是pathname。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/tag/">标签</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&text=微信公众号消息推送SDK for Python"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&is_video=false&description=微信公众号消息推送SDK for Python"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=微信公众号消息推送SDK for Python&body=Check out this article: https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&title=微信公众号消息推送SDK for Python"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&name=微信公众号消息推送SDK for Python&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://x1a0.net/2024/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81SDK-for-Python/&t=微信公众号消息推送SDK for Python"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2017-2024
+    xiaoyue
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tag/">标签</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/xiaoyue2019">项目</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?d43d39b2db396dc52c59caa1f37e70f5";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
