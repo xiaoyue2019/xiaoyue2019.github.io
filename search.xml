@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>diary 28 february 2025</title>
+      <link href="/2025/diary-28-february-2025/"/>
+      <url>/2025/diary-28-february-2025/</url>
+      
+        <content type="html"><![CDATA[<p>;dlfjalsdfjaklsdf;aksdjfaklsdf;aksdjf;kladsjf;kladsjf</p><p>昨晚创建的blog 今天开始写</p><p>对面是滑雪场 深山里</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">pyautogui </span><br><span class="line">python system proxy</span><br><span class="line"></span><br><span class="line">bit brawser pythonwright库 </span><br><span class="line">cf_clearance cliffs ssl指纹</span><br><span class="line"></span><br><span class="line">nginx certbot</span><br></pre></td></tr></table></figure><p>这是昨天写的大纲, 本来想记录下最近几个项目的收获</p><p>但是发现好像都是用chatGPT写的…</p><p>pyautogui 模拟鼠标键盘 识别图片 只要没有弹窗, 还是很好用的</p><p>可以通过bit+browser+cliffs+drissionpage来绕过cf_clearance<br>是个很好的思路(对于我这种菜鸟来说)<br>还没体会到拽神的开发快感, 下次看来得少用一点ai了</p><p>配置Nginx+certbot获取ssl证书, 还有golang的ws, 以及api路由一个端口<br>不同路径.</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>应该是24年最后一篇小计</title>
       <link href="/2024/%E5%BA%94%E8%AF%A5%E6%98%AF24%E5%B9%B4%E6%9C%80%E5%90%8E%E4%B8%80%E7%AF%87%E5%B0%8F%E8%AE%A1/"/>
       <url>/2024/%E5%BA%94%E8%AF%A5%E6%98%AF24%E5%B9%B4%E6%9C%80%E5%90%8E%E4%B8%80%E7%AF%87%E5%B0%8F%E8%AE%A1/</url>
