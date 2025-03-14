@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>配置vscode免密和github免密</title>
+      <link href="/2025/%E9%85%8D%E7%BD%AEvscode%E5%85%8D%E5%AF%86%E5%92%8Cgithub%E5%85%8D%E5%AF%86/"/>
+      <url>/2025/%E9%85%8D%E7%BD%AEvscode%E5%85%8D%E5%AF%86%E5%92%8Cgithub%E5%85%8D%E5%AF%86/</url>
+      
+        <content type="html"><![CDATA[<p>也是一直忘记</p><p>做个备份</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub <span class="comment"># 本机公钥</span></span><br><span class="line">vi ~/.ssh/authorized_keys <span class="comment"># 配置ssh免密</span></span><br><span class="line"></span><br><span class="line">vi /etc/ssh/sshd_config <span class="comment"># 增加ssh登录</span></span><br><span class="line">PubkeyAuthentication <span class="comment"># 取消注释</span></span><br><span class="line">service ssh restart <span class="comment"># 重启ssh服务</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>git 删除ds_store缓存</title>
       <link href="/2025/git-%E5%88%A0%E9%99%A4ds-store%E7%BC%93%E5%AD%98/"/>
       <url>/2025/git-%E5%88%A0%E9%99%A4ds-store%E7%BC%93%E5%AD%98/</url>
